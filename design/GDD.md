@@ -1,262 +1,291 @@
-# Game Design Document - "I Live With 2 Dogs"
+# Game Design Document - Lost Dreams
 
-## 1) High Concept
-A remote game developer tries to finish a sprint while two dogs constantly interrupt. The player balances productivity, stress, and dog happiness across a short sprint to reach a variety of endings.
+## 1. Visión General
 
-## 2) Core Pillars
-- **Tension vs. Care**: Productivity competes with dog attention.
-- **Short-term choices**: Each day is a bite-sized management loop.
-- **Readable consequences**: Metrics clearly shift based on actions.
-- **Comedic realism**: Everyday chaos, playful exaggeration.
+**Título:** Lost Dreams
 
-## 3) Target Experience
-Light management with comedic stress, rapid day loops, and multiple endings that encourage replay.
+**Género:** Roguelike / Tower Defense Híbrido
 
-## 4) Gameplay Loop
-1) Start day with current stats and sleep buff/debuff.
-2) Work on tasks while handling dog interruptions.
-3) React to random events (calls, barking, monitor disconnect).
-4) End day, compute sleep quality for next day.
-5) Final day or loss triggers ending scene.
+**Plataforma:** Godot Engine
 
-## 5) Player Metrics (0-100)
-- **Work (W)**: Productivity and task completion.
-- **Stress (S)**: Accumulated pressure; high S causes penalties.
-- **Dogs (D)**: Dog happiness/settledness.
+**Descripción:** Un juego de acción roguelike donde el jugador navega por torres de combate, resuelve desafíos de parkour, gestiona una economía de combate y progresa mediante un sistema de habilidades progresivas con finales únicos basados en decisiones.
 
-## 6) Day Structure
-- **Morning**: Lower interruptions, planning window.
-- **Midday**: Calls appear, dog events spike.
-- **Evening**: Deadline pressure increases; higher stress decay risk.
+---
 
-## 7) Core Actions
-- **Code Task**: Raises W, raises S slightly.
-- **Fix Bug**: Raises W, raises S more.
-- **Play Fetch**: Raises D, small W decrease, risk of monitor disconnect.
-- **Show Door**: Reduces barking event, small time cost.
-- **Short Break**: Reduces S slightly, no W gain.
-- **Call**: Time-limited; failure hurts W and S.
+## 2. Mecánicas Principales
 
-## 7.1) Dev Task Catalog (Work Activities)
-These are the core work activities during the day.
-- **Implement Feature**: Medium duration, solid W gain.
-- **Fix Bug**: Short/medium duration, medium W gain, higher S.
-- **Refactor / Cleanup**: Longer duration, small W gain, lowers future S spikes.
-- **Review PR**: Short duration, small W gain, lowers future bug events.
-- **Write Tests**: Medium duration, small W gain, reduces bug event chance.
-- **Documentation**: Medium duration, small W gain, reduces call penalties.
-- **Build / Deploy**: Short duration, moderate W gain, risk of failure event.
+### 2.1 Sistema de Combate
+- **Tipo:** Acción en tiempo real
+- **Características:**
+  - Sistema de combate basado en salas (room_combat_system)
+  - Encuentros contra enemigos con dificultad escalable
+  - Recompensas por victoria (dinero, ítems, experiencia)
+  - Sistema de daño y defensa
 
-## 7.4) Task Overload Model
-The game should present many small tasks at once. The player must pick which to accept and which to ignore.
-Ignoring tasks always has a cost that affects one of the three metrics:
-- Ignore a dev task: lose W (missed progress).
-- Ignore a dog request: lose D (happiness drops).
-- Ignore a work interruption (call/ping/intern): gain S or increase future bug risk.
+### 2.2 Sistema de Progresión
+- **Selección de Niveles:** El jugador elige qué nivel/torre jugar
+- **Oleadas de Enemigos:** Progression por waves con dificultad creciente
+- **Boss Fights:** Encuentros finales con mecánicas especiales
+  - Sistema de etapas de boss (boss_stage_system)
+  - Recompensas especiales por derrota (boss_reward_system)
 
-This creates constant tradeoffs between W, S, and D.
+### 2.3 Sistema de Habilidades
+- **Asignación de Habilidades:** El jugador obtiene habilidades progresivamente
+- **Award System:** Sistema de otorgamiento automático basado en logros/progreso
+- **Árbol de Habilidades:** Progresión conectada de habilidades
 
-## 7.5) Suggested Numbers (Baseline)
-These are starting values to tune.
+### 2.4 Sistema de Parkour
+- **Gates de Parkour:** Desafíos de movimiento para avanzar
+- **Sistema de Puertas:** Progresión mediante superación de obstáculos
+- **Mecánicas:** Saltos, deslizamientos, evitación de peligros
 
-Task durations (seconds):
-- Micro task: 15-25s
-- Small task: 25-45s
-- Medium task: 45-70s
+### 2.5 Sistema de Economía
+- **Moneda de Combate:** Ganancia en cada sala
+- **Tienda:** Sistema de compra/venta en checkpoints
+  - Ofertas de tienda (shop_offer_system)
+  - Resolución de transacciones (shop_resolve_system)
+- **Gestión de Recursos:** Dinero, ítems, potenciadores
 
-Task effects:
-- Implement Feature (small/medium): +8 W, +4 S
-- Fix Bug (micro/small): +6 W, +6 S
-- Refactor / Cleanup (medium): +4 W, -3 future S spikes
-- Review PR (micro): +3 W, -2 bug chance
-- Write Tests (small): +4 W, -4 bug chance
-- Documentation (small): +3 W, -2 call penalty
-- Build / Deploy (micro): +5 W, +2 S, 20% failure chance
+### 2.6 Sistema de Finales
+- **Múltiples Finales:** Basados en decisiones y progreso
+- **Condiciones de Victoria/Derrota:** Claras y definidas
+- **Cierre de Corrida:** Sistema de finalización de runs (run_end_system)
+- **Registro de Runs:** Sistema de replay para reproducción
 
-Ignore penalties:
-- Ignore dev task: -5 W
-- Ignore call/ping/intern: +5 S (intern ignore also +10% next-day bug chance)
-- Ignore dog request: -8 D
+---
 
-Dog actions:
-- Play Fetch: +10 D, -2 W, 25% monitor disconnect
-- Show Door: +6 D, -2 W, 15% dog escapes (time loss)
-- Quick Pet: +3 D, no W change, short duration
+## 3. Estructuras de Datos
 
-Event consequences:
-- Monitor disconnect: lose 10-20s, +4 S
-- Dog escapes: lose 20-40s, +6 S, -3 W
+### 3.1 Configuración de Corrida (Run Config)
+```
+- Dificultad
+- Semilla de generación (RNG)
+- Modificadores de experiencia
+- Reglas de final
+```
 
-## 7.6) Daily Task Scheduler
-- Start each day with 3-5 tasks available.
-- Every 30-45s, add 1 new task until a max of 7 active tasks.
-- Hard cap: 7 active tasks (new tasks queue up as pressure).
-- If active tasks exceed 5 for more than 30s: +2 S every 15s.
+### 3.2 Estado de Juego
+```
+- Progreso del jugador
+- Inventario actual
+- Estadísticas de combate
+- Nivel actual
+- Oleada actual
+```
 
-## 7.2) Stress Triggers (Work Context)
-These are the main stress sources while working.
-- **Interruptions**: Dog events, calls, notifications.
-- **Deadline Pressure**: Increases as day progresses.
-- **Context Switching**: Jumping between tasks too often.
-- **Failure Events**: Build fails, call drops, monitor disconnect.
-- **Unresolved Barking**: Dog A or B left unattended too long.
+### 3.3 Definiciones de Contenido
+```
+- Definiciones de enemigos (enemy_def)
+- Definiciones de salas (room_def)
+- Definiciones de oleadas (wave_def)
+- Definiciones de niveles (level_def)
+- Registros de enemigos, salas, oleadas
+```
 
-## 7.3) Random Work Events
-These occur while trying to work.
-- **Surprise Call**: Must answer/decline; affects W and S.
-- **Urgent Bug Report**: Forces a quick fix or delay penalty.
-- **Build Failure**: Requires a short fix minigame.
-- **Stakeholder Ping**: Adds stress if ignored; optional quick response.
-- **Task Scope Creep**: Adds extra steps to current feature.
-- **Intern Question**: Simple request that interrupts focus; low W impact, small S increase if ignored.
-  - If ignored repeatedly: adds higher bug chance next day or a final-day error event.
+---
 
-## 8) Random Events
-- **Monitor Disconnect**: Triggered by fetch; causes a recovery minigame.
-- **Barking at Nothing**: Requires a quick response.
-- **Surprise Call**: Must decide to answer, delay, or ignore.
-- **Slack Ping**: Low impact; piles up stress if ignored.
+## 4. Flujo de Juego
 
-## 9) Dog Behaviors
-- **Dog A (ball-focused)**: Wants fetch regularly; if ignored, D drops fast.
-- **Dog B (barking)**: Random barking events; must be calmed.
-- **Angry Barking**: If Dog A is ignored too long, enters a sustained bark mode.
+### 4.1 Inicio
+1. Pantalla de título
+2. Selección de dificultad/modificadores
+3. Pantalla de selección de nivel
 
-## 10) Coffee & Melatonin
-- **Coffee (Boost)**:
-  - Immediate: +W, short-term S reduction.
-  - Tradeoff: Later S spike or worse sleep quality.
-- **Melatonin (Sleep Aid)**:
-  - Improves next-day sleep buff chance.
-  - Tradeoff: Lower early-day W or slower reaction time.
+### 4.2 Bucle Principal
+1. **Selección de Torre/Nivel** → `level_selection_system`
+2. **Combate en Salas** → `room_combat_system`
+3. **Economía/Tienda** → `shop_offer_system` + `shop_resolve_system`
+4. **Desafíos de Parkour** → `parkour_gate_system`
+5. **Oleadas y Progresión** → `wave_registry` + `room_registry`
+6. **Boss Final** → `boss_stage_system` + `boss_reward_system`
 
-## 11) Sleep Buff/Debuff
-End-of-day sleep quality modifies next day:
-- Good sleep: +W and -S next day.
-- Poor sleep: -W and +S next day.
+### 4.3 Finalización
+1. Evaluación de condiciones de final
+2. Pantalla de resultados
+3. Sistema de puntuación/replay
 
-## 12) Win/Loss Conditions
-- **Loss**: S reaches critical, or W collapses to zero on a key day.
-- **Win**: Finish the sprint and trigger an ending.
+---
 
-## 13) Endings
-Based on combined W/S/D averages and critical events. See:
-`design/ENDINGS_RULES.md`
+## 5. Sistemas Principales
 
-## 14) Art & Tone
-- Cozy home office, cluttered desk, warm palette.
-- Subtle animation emphasis on dog antics.
-- Humor in UI: faux calendar, tiny dev notes.
+### 5.1 Sistema de Combate
+- **room_combat_system.gd:** Gestiona encuentros enemigos
+- **Mecánicas:** Ataque, defensa, habilidades especiales
+- **IA de Enemigos:** Patterns y comportamientos
 
-## 14.1) Camera & Interaction Style (FNAF-like)
-- **Fixed perspective**: The developer never moves; only cursor interactions.
-- **Hotspot interactions**: Clickable desk objects (PC, ball, door, coffee, melatonin).
-- **Door check**: A quick “peek” view outside to calm barking.
-- **Risk tradeoff**: Opening the door can trigger a dog escape event.
-- **UI-driven focus**: Most feedback comes via HUD and popups, not movement.
+### 5.2 Sistema de Habilidades
+- **ability_award_system.gd:** Otorga habilidades automáticamente
+- **Árbol de Habilidades:** Conexiones y dependencias
+- **Efectos:** Modificadores de estadísticas, nuevas acciones
 
-## 14.2) Hotspot Layout (Suggested)
-Screen is divided into a static desk scene with clickable zones.
+### 5.3 Sistema de Recompensas
+- **boss_reward_system.gd:** Recompensas de boss
+- **Dinero, Ítems Únicos, Habilidades Desbloqueadas**
 
-Primary hotspots:
-- **PC/Monitor** (center): Work tasks, calls, notifications.
-- **Ball/Throw zone** (right side): Play fetch action.
-- **Door** (left side): Open/peek to calm barking.
-- **Cable/Power strip** (lower right): Recover from disconnect.
-- **Coffee mug** (right/top): Coffee boost.
-- **Nightstand/Drawer** (left/top): Melatonin for sleep aid.
+### 5.4 Sistema de Finales
+- **Condiciones Múltiples:** Victoria, Derrota, Final Secreto
+- **Impacto de Decisiones:** Afecta al final obtenido
+- **Cierre de Corrida:** `run_end_system.gd`
 
-Secondary hotspots (optional):
-- **Phone** (near monitor): Accept/decline calls.
-- **Notes/Planner** (left of monitor): View task queue.
-- **Trash bin** (bottom corner): Quick “clear desk” stress relief.
+### 5.5 Sistema de Configuración
+- **run_config.gd + run_config.json**
+- **Parámetros Ajustables:** Dificultad, RNG, Multiplicadores
 
-## 14.3) Wireframe (Text, 0-100% coords)
-Coordinate system: (0,0) = top-left, (100,100) = bottom-right.
+---
 
-Hotspot rectangles (x1,y1,x2,y2):
-- **PC/Monitor**: 35,25,70,60
-- **Phone**: 70,30,82,45
-- **Ball/Throw zone**: 78,55,98,85
-- **Door**: 0,30,12,85
-- **Cable/Power strip**: 70,85,95,98
-- **Coffee mug**: 60,15,72,28
-- **Nightstand/Drawer**: 12,10,28,25
-- **Notes/Planner**: 28,30,35,45
-- **Trash bin**: 0,85,12,100
+## 6. Contenido y Datos
 
-## 14.4) Hotspot Feedback (UI/UX)
-- **Cursor change**: Highlight/hand icon when hovering a hotspot.
-- **Tooltip**: Short label + cost/benefit (e.g., "+D, risk disconnect").
-- **Hover glow**: Subtle outline to confirm target area.
-- **Click response**: Sound cue + small animation (button press, shake, pulse).
-- **Cooldown indicator**: Tiny ring or timer near the hotspot if on cooldown.
+### 6.1 Niveles/Torres
+```
+- Estructura de salas progresivas
+- Enemigos por nivel
+- Dificultad escalada
+- Recompensas por nivel
+```
 
-## 15) Audio
-- Soft ambient home noise.
-- Dog barks and fetch SFX.
-- Notification sounds for calls and pings.
+### 6.2 Enemigos
+- **Tipos Variados:** Melee, Range, Boss
+- **Estadísticas:** HP, Ataque, Defensa, Velocidad
+- **Drops:** Dinero, Ítems, Experiencia
 
-## 16) UI/UX
-- Persistent meters for W/S/D.
-- Minimal text prompts, large action buttons.
-- End-of-day summary panel (not full ending unless final day).
+### 6.3 Ítems y Habilidades
+- **Rareza:** Común, Raro, Épico, Legendario
+- **Efectos:** Pasivos y Activos
+- **Sinergia:** Bonificaciones por combinaciones
 
-## 17) Progression
-- Sprint length selectable (3/5/7).
-- Unlock small perks (better toys, stable monitor, training).
+---
 
-## 18) MVP Scope
-- One sprint length (5 days).
-- Two dog behaviors.
-- Calls, barking, fetch, monitor disconnect.
-- 6-10 endings.
+## 7. Sistemas de Datos y Utilidades
 
-## 19) Risks & Open Questions
-- Balancing stress penalties without feeling unfair.
-- Ensuring dogs feel like characters, not pure timers.
-- How comedic to make the “fatal collapse” ending.
+### 7.1 RNG (Random Number Generation)
+- **Seed System:** Reproducibilidad en replays
+- **Determinismo:** Runs idénticas con misma seed
 
-## 20) Next Steps
-- Build a paper prototype with daily loops.
-- Implement basic event scheduler.
-- Playtest for pacing and fairness.
+### 7.2 Hash System
+- **Verificación de Integridad**
+- **Identificadores Únicos**
 
-## 21) Daily Task Briefing
-At the start of each day, present a list of tasks with:
-- **Estimated time** (duration range).
-- **Difficulty** (translates into stress).
-- **Priority** (affects scoring and rewards).
+### 7.3 Type System
+- **Tipos de Contenido**
+- **Validación de Datos**
 
-## 22) Work Characters & Calls
-All calls can be interrupted by dog events. If interrupted, the caller’s response is negative and may change rewards.
+### 7.4 Event Bus
+- **Comunicación entre Sistemas**
+- **Desacoplamiento de Módulos**
 
-- **PM/SM (Project Manager / Scrum Master)**:
-  - Calls to update priorities.
-  - If missed, the player does not learn which tasks changed value.
-  - Risk: you might complete a difficult task that no longer grants points.
-  - If dogs interrupt the call (noise), PM/SM gets annoyed.
+### 7.5 Sistema de Errores
+- **Manejo de Excepciones**
+- **Logging y Debugging**
 
-- **Intern**:
-  - Asks easy questions that take a small time cost.
-  - Takes a noticeable time cost to answer (longer than a quick ping).
-  - If ignored repeatedly, next day starts with extra tasks.
+---
 
-- **Boss**:
-  - Calls for high-priority requests.
-  - Missing the call increases stress and reduces W for the day.
+## 8. Mods y Extensibilidad
 
-- **Coworker**:
-  - Asks for help; costs time but grants a **Joker token**.
-  - Joker can be used later to reduce the cost of a task or skip a minor penalty.
+### 8.1 Sistema de Mods
+- **Packs de Contenido:** `mod_packs/`
+- **Ejemplos de Mods:**
+  - `example_item_mod/`: Añade ítems nuevos
+  - `example_level_mod/`: Añade niveles nuevos
 
-## 23) Interruption Rule
-Any ongoing action (task, call, or event) can be interrupted by:
-- Dog barking
-- Ball request
-- Door check
-Interruption either pauses or cancels the action, with stress penalties.
+### 8.2 Integración de Mods
+- **Carga Dinámica**
+- **Compatibilidad**
+- **Sandboxing**
 
-Calls can also be disrupted by negative dog outcomes:
-- **Monitor disconnect** during a call cancels it.
-- **Dog escape** during a call cancels it.
+---
+
+## 9. Especificaciones Técnicas
+
+### 9.1 Engine
+- **Godot Engine 4.x**
+- **GDScript**
+
+### 9.2 Arquitectura
+- **Núcleo de Juego:** `game_core.gd` + `game_kernel.gd`
+- **API de Juego:** `game_api.gd`
+- **Estado:** `game_state.gd` + `run_state.gd`
+- **Constantes:** `constants.gd`
+
+### 9.3 Plugins
+- **rage_core:** Sistema central
+- **rage_toolkit:** Herramientas de editor
+
+---
+
+## 10. Finales y Reglas de Fin (End Rules)
+
+### 10.1 Condiciones de Victoria
+1. **Derrota de Boss Final**
+2. **Completar N Oleadas**
+3. **Acumular X Dinero**
+
+### 10.2 Condiciones de Derrota
+1. **HP Llega a Cero**
+2. **Tiempo se Agota**
+3. **Falla en Desafío de Parkour Crítico**
+
+### 10.3 Finales Secretos
+1. **Obtener Habilidad Legendaria**
+2. **Completar Objetivo Oculto**
+3. **Decisión Única en Tienda**
+
+### 10.4 Sistema de Puntuación
+- **Dinero Acumulado**
+- **Enemigos Derrotados**
+- **Habilidades Obtenidas**
+- **Tiempo de Juego**
+- **Multiplicador de Dificultad**
+
+---
+
+## 11. Progresión y Balanceo
+
+### 11.1 Curva de Dificultad
+- **Escalado Gradual:** Primer 25% fácil, incremento progresivo
+- **Picos de Dificultad:** Boss fights
+- **Descansos:** Salas de tienda/parkour
+
+### 11.2 Recompensas
+- **Dinero:** 10-100 por sala, 500+ por boss
+- **Ítems:** 20% chance por sala
+- **Habilidades:** 1 cada 3 salas aprox.
+
+### 11.3 Curva de Poder del Jugador
+- **Temprana:** Habilidades básicas, poco dinero
+- **Media:** Ítems synergizados, comienza especialización
+- **Tardía:** Builds poderosos, habilidades legendarias
+
+---
+
+## 12. UI/UX
+
+### 12.1 Pantallas Principales
+- **Menú Principal**
+- **Selección de Nivel**
+- **HUD de Combate:** HP, Habilidades, Dinero
+- **Pantalla de Tienda**
+- **Pantalla de Habilidades**
+- **Pantalla de Resultados**
+
+### 12.2 Información del Jugador
+- **Estadísticas Actuales**
+- **Inventario**
+- **Historial de Habilidades**
+- **Puntuación**
+
+---
+
+## 13. Notas de Desarrollo
+
+- Sistema completamente modular
+- Diseño extensible via mods
+- Énfasis en replayability via RNG + finales múltiples
+- Replay system para compartir/analizar runs
+- Event bus para comunicación desacoplada
+- Validación de tipos mediante type system
+
+---
+
+**Versión del Documento:** 1.0  
+**Última Actualización:** 26 de Enero, 2026  
+**Responsable:** Equipo de Desarrollo

@@ -66,6 +66,11 @@ def project_root(path: str) -> str:
     return root
 
 
+def _get_toolkit_path(root: str) -> str:
+    """Get path to rage_toolkit (where rage.py now lives)"""
+    return os.path.join(root, "addons", "rage_toolkit")
+
+
 def cmd_mod_new(args: argparse.Namespace) -> None:
     root = project_root(args.root)
     mod_id = args.id
@@ -691,10 +696,10 @@ def cmd_project_init(args: argparse.Namespace) -> None:
     kernel_path = os.path.join(root, "game", "game_kernel.gd")
     if not os.path.exists(kernel_path) or args.force:
         write_file(kernel_path, _game_kernel_template(), True)
-    cli_path = os.path.join(root, "rage.py")
-    if not os.path.exists(cli_path) or args.force:
-        with open(__file__, "r", encoding="utf-8") as f:
-            write_file(cli_path, f.read(), True)
+    # rage.py is now in addons/rage_toolkit/, no need to copy it
+    toolkit_path = _get_toolkit_path(root)
+    if not os.path.exists(toolkit_path):
+        print(f"Note: rage.py is now in {toolkit_path}/rage.py")
     print(f"initialized project with mod '{args.mod}' and pack '{args.pack}'")
 
 
@@ -722,6 +727,215 @@ def cmd_modpack_new(args: argparse.Namespace) -> None:
         )
         write_file(scene_path, content, args.force)
     print(f"created mod+pack: {args.id}")
+
+
+# ============================================================================
+# New Commands: Using Rage Core Metaprogramming Tools
+# ============================================================================
+
+def _system_template(system_name: str, phase: str = "phase.gameplay", priority: int = 50) -> str:
+    """Generate system template matching SystemGenerator.generate_system_template"""
+    class_name = to_class_name(system_name)
+    return f"""# Game: {system_name} system. Allowed deps: core types + game types.
+class_name {class_name}System
+extends SimulationStep
+
+func run(context: SimulationContext, delta: float) -> void:
+	# TODO: Implement {system_name} logic
+	pass
+"""
+
+
+def _event_template(event_name: str, event_id: str = "") -> str:
+    """Generate event template matching SystemGenerator.generate_event_template"""
+    if not event_id:
+        event_id = f"game.{event_name.lower().replace(' ', '_')}"
+    class_name = to_class_name(event_name + "Event")
+    return f"""# Game: {event_name} event payload. Uses Rage Core EventBase.
+class_name {class_name}
+extends EventBase
+
+const ID := "{event_id}"
+
+func _init() -> void:
+	super._init(ID)
+	payload = {{
+		# TODO: Add event payload fields
+	}}
+
+func validate() -> Result:
+	# TODO: Add validation logic
+	return Result.ok_result(true)
+"""
+
+
+def _command_template(command_name: str, command_id: str = "") -> str:
+    """Generate command template matching SystemGenerator.generate_command_template"""
+    if not command_id:
+        command_id = f"cmd.{command_name.lower().replace(' ', '_')}"
+    class_name = to_class_name(command_name + "Command")
+    return f"""# Game: {command_name} command. Allowed deps: core types + game types.
+class_name {class_name}
+extends ICommand
+
+const ID := "{command_id}"
+
+var _entity_id: String
+# TODO: Add command fields
+
+func _init(entity_id: String) -> void:
+	_entity_id = entity_id
+
+func get_id() -> String:
+	return ID
+
+func validate() -> Result:
+	if not Ids.is_valid_id(_entity_id):
+		return Result.err_result("Invalid entity_id")
+	# TODO: Add more validation
+	return Result.ok_result(true)
+"""
+
+
+def cmd_system_new(args: argparse.Namespace) -> None:
+    """Create a game system using SystemGenerator template"""
+    root = project_root(args.root)
+    system_name = args.name
+    output_dir = args.output or "game/systems"
+    phase = args.phase or "phase.gameplay"
+    priority = args.priority or 50
+    
+    ensure_dir(os.path.join(root, output_dir))
+    system_path = os.path.join(root, output_dir, f"{system_name.lower()}_system.gd")
+    content = _system_template(system_name, phase, priority)
+    write_file(system_path, content, args.force)
+    print(f"created system: {system_path}")
+    print(f"  Use CodeGenerator.generate_and_register_system() to auto-register in game_kernel.gd")
+
+
+def cmd_event_new(args: argparse.Namespace) -> None:
+    """Create an event using SystemGenerator template"""
+    root = project_root(args.root)
+    event_name = args.name
+    event_id = args.event_id or ""
+    output_dir = args.output or "game/events"
+    
+    ensure_dir(os.path.join(root, output_dir))
+    event_path = os.path.join(root, output_dir, f"{event_name.lower()}_event.gd")
+    content = _event_template(event_name, event_id)
+    write_file(event_path, content, args.force)
+    print(f"created event: {event_path}")
+
+
+def cmd_command_new(args: argparse.Namespace) -> None:
+    """Create a command using SystemGenerator template"""
+    root = project_root(args.root)
+    command_name = args.name
+    command_id = args.command_id or ""
+    output_dir = args.output or "game/commands"
+    
+    ensure_dir(os.path.join(root, output_dir))
+    command_path = os.path.join(root, output_dir, f"{command_name.lower()}_command.gd")
+    content = _command_template(command_name, command_id)
+    write_file(command_path, content, args.force)
+    print(f"created command: {command_path}")
+
+
+def cmd_system_complete(args: argparse.Namespace) -> None:
+    """Create a complete system with events using CodeGenerator approach"""
+    root = project_root(args.root)
+    system_name = args.name
+    output_dir = args.output or "game/systems"
+    phase = args.phase or "phase.gameplay"
+    priority = args.priority or 50
+    events = args.events or []
+    
+    # Generate system
+    ensure_dir(os.path.join(root, output_dir))
+    system_path = os.path.join(root, output_dir, f"{system_name.lower()}_system.gd")
+    
+    # Generate system with events if provided
+    if events:
+        event_preloads = ""
+        event_vars = ""
+        for event_name in events:
+            class_name = to_class_name(event_name + "Event")
+            event_preloads += f"const {class_name} = preload(\"res://game/events/{event_name.lower()}_event.gd\")\n"
+            event_vars += f"\tvar {event_name.lower()}_ev: {class_name}\n"
+        
+        class_name = to_class_name(system_name)
+        system_content = f"""# Game: {system_name} system. Allowed deps: core types + game types.
+class_name {class_name}System
+extends SimulationStep
+
+{event_preloads}
+
+func run(context: SimulationContext, delta: float) -> void:
+	# TODO: Implement {system_name} logic
+{event_vars}
+	pass
+"""
+    else:
+        system_content = _system_template(system_name, phase, priority)
+    
+    write_file(system_path, system_content, args.force)
+    
+    # Generate event files
+    if events:
+        events_dir = os.path.join(root, output_dir, "..", "events")
+        ensure_dir(events_dir)
+        for event_name in events:
+            event_path = os.path.join(events_dir, f"{event_name.lower()}_event.gd")
+            event_content = _event_template(event_name)
+            write_file(event_path, event_content, args.force)
+    
+    print(f"created system: {system_path}")
+    if events:
+        print(f"created {len(events)} event(s)")
+    print(f"  Use CodeGenerator.generate_and_register_system() to auto-register in game_kernel.gd")
+
+
+def cmd_generate_script(args: argparse.Namespace) -> None:
+    """Generate a GDScript script that uses CodeGenerator to create systems"""
+    root = project_root(args.root)
+    script_path = os.path.join(root, args.output or "generate_systems.gd")
+    
+    content = """# Auto-generated script to use CodeGenerator
+# Run this from Godot editor (EditorScript) or attach to a Node
+
+extends Node
+
+func _ready() -> void:
+	_generate_systems()
+
+func _generate_systems() -> void:
+	print("=== Generating Systems with CodeGenerator ===")
+	
+	# Example: Generate a system
+	# var result = CodeGenerator.generate_and_register_system(
+	#     "MySystem",
+	#     "res://game/game_kernel.gd",
+	#     "res://game/systems",
+	#     "phase.gameplay",
+	#     50,
+	#     true
+	# )
+	
+	# Example: Generate system with events
+	# var result = CodeGenerator.generate_system_complete(
+	#     "Combat",
+	#     "res://game/systems",
+	#     "phase.gameplay",
+	#     50,
+	#     ["DamageDealt", "EnemyDefeated"],
+	#     true
+	# )
+	
+	print("Edit this script to generate your systems!")
+"""
+    write_file(script_path, content, args.force)
+    print(f"created generator script: {script_path}")
+    print("  Edit and run this script in Godot to use CodeGenerator")
 
 def main() -> None:
     parser = argparse.ArgumentParser(prog="rage", description="Rage Core scaffolding CLI")
@@ -830,6 +1044,43 @@ def main() -> None:
     system_game.add_argument("--order", type=int, default=0)
     system_game.add_argument("--force", action="store_true")
     system_game.set_defaults(func=cmd_game_system_new)
+
+    # New metaprogramming commands
+    system_new = sub.add_parser("system:new", help="Create a game system using SystemGenerator template")
+    system_new.add_argument("name", help="System name (e.g., 'Combat', 'Economy')")
+    system_new.add_argument("--output", default="game/systems", help="Output directory (default: game/systems)")
+    system_new.add_argument("--phase", default="phase.gameplay", help="Simulation phase (default: phase.gameplay)")
+    system_new.add_argument("--priority", type=int, default=50, help="Priority in phase (default: 50)")
+    system_new.add_argument("--force", action="store_true", help="Overwrite existing files")
+    system_new.set_defaults(func=cmd_system_new)
+
+    event_new = sub.add_parser("event:new", help="Create an event using SystemGenerator template")
+    event_new.add_argument("name", help="Event name (e.g., 'DamageDealt', 'ItemCollected')")
+    event_new.add_argument("--event-id", default="", help="Event ID (default: auto-generated)")
+    event_new.add_argument("--output", default="game/events", help="Output directory (default: game/events)")
+    event_new.add_argument("--force", action="store_true", help="Overwrite existing files")
+    event_new.set_defaults(func=cmd_event_new)
+
+    command_new = sub.add_parser("command:new", help="Create a command using SystemGenerator template")
+    command_new.add_argument("name", help="Command name (e.g., 'Move', 'Attack')")
+    command_new.add_argument("--command-id", default="", help="Command ID (default: auto-generated)")
+    command_new.add_argument("--output", default="game/commands", help="Output directory (default: game/commands)")
+    command_new.add_argument("--force", action="store_true", help="Overwrite existing files")
+    command_new.set_defaults(func=cmd_command_new)
+
+    system_complete = sub.add_parser("system:complete", help="Create a complete system with events (CodeGenerator approach)")
+    system_complete.add_argument("name", help="System name")
+    system_complete.add_argument("--output", default="game/systems", help="Output directory (default: game/systems)")
+    system_complete.add_argument("--phase", default="phase.gameplay", help="Simulation phase (default: phase.gameplay)")
+    system_complete.add_argument("--priority", type=int, default=50, help="Priority in phase (default: 50)")
+    system_complete.add_argument("--events", nargs="+", default=[], help="Event names to generate (e.g., DamageDealt EnemyDefeated)")
+    system_complete.add_argument("--force", action="store_true", help="Overwrite existing files")
+    system_complete.set_defaults(func=cmd_system_complete)
+
+    generate_script = sub.add_parser("generate:script", help="Generate a GDScript that uses CodeGenerator")
+    generate_script.add_argument("--output", default="generate_systems.gd", help="Output script path (default: generate_systems.gd)")
+    generate_script.add_argument("--force", action="store_true", help="Overwrite existing files")
+    generate_script.set_defaults(func=cmd_generate_script)
 
     args = parser.parse_args()
     if not args.cmd:
