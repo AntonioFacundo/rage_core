@@ -1,0 +1,212 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/rage_toolkit/editor/scaffold_dock.gd" id="1"]
+
+[node name="RageCoreScaffold" type="ScrollContainer"]
+
+[node name="Content" type="VBoxContainer" parent="."]
+script = ExtResource("1")
+
+[node name="Title" type="Label" parent="Content"]
+text = "Rage Core Scaffold"
+
+[node name="Options" type="HBoxContainer" parent="Content"]
+
+[node name="OverwriteLabel" type="Label" parent="Content/Options"]
+text = "Overwrite"
+
+[node name="Overwrite" type="CheckBox" parent="Content/Options"]
+text = "Enable"
+
+[node name="ProjectInit" type="HBoxContainer" parent="Content"]
+
+[node name="ProjectInitLabel" type="Label" parent="Content/ProjectInit"]
+text = "Project Init"
+
+[node name="ProjectInitButton" type="Button" parent="Content/ProjectInit"]
+text = "Create Base"
+
+[node name="ModpackNew" type="VBoxContainer" parent="Content"]
+
+[node name="ModpackLabel" type="Label" parent="Content/ModpackNew"]
+text = "Mod + Pack"
+
+[node name="ModpackRow" type="HBoxContainer" parent="Content/ModpackNew"]
+
+[node name="ModpackId" type="LineEdit" parent="Content/ModpackNew/ModpackRow"]
+placeholder_text = "mod_id"
+
+[node name="ModpackScene" type="CheckBox" parent="Content/ModpackNew/ModpackRow"]
+text = "Create Scene"
+
+[node name="ModpackButton" type="Button" parent="Content/ModpackNew"]
+text = "Create Mod+Pack"
+
+[node name="GameNew" type="VBoxContainer" parent="Content"]
+
+[node name="GameLabel" type="Label" parent="Content/GameNew"]
+text = "Game Template"
+
+[node name="GameRow" type="HBoxContainer" parent="Content/GameNew"]
+
+[node name="GameId" type="LineEdit" parent="Content/GameNew/GameRow"]
+placeholder_text = "game_id"
+
+[node name="GameTemplate" type="OptionButton" parent="Content/GameNew/GameRow"]
+
+[node name="GameScene" type="CheckBox" parent="Content/GameNew/GameRow"]
+text = "Create Scene"
+
+[node name="GameButton" type="Button" parent="Content/GameNew"]
+text = "Create Game"
+
+[node name="PickupNew" type="VBoxContainer" parent="Content"]
+
+[node name="PickupLabel" type="Label" parent="Content/PickupNew"]
+text = "Pickup"
+
+[node name="PickupRow" type="HBoxContainer" parent="Content/PickupNew"]
+
+[node name="PickupId" type="LineEdit" parent="Content/PickupNew/PickupRow"]
+placeholder_text = "pickup_id"
+
+[node name="PickupMod" type="LineEdit" parent="Content/PickupNew/PickupRow"]
+placeholder_text = "mod_id"
+
+[node name="PickupSprite" type="LineEdit" parent="Content/PickupNew/PickupRow"]
+placeholder_text = "sprite_path (optional)"
+
+[node name="PickupSpritePick" type="Button" parent="Content/PickupNew/PickupRow"]
+text = "Pick"
+
+[node name="PickupSound" type="LineEdit" parent="Content/PickupNew/PickupRow"]
+placeholder_text = "sound_path (optional)"
+
+[node name="PickupSoundPick" type="Button" parent="Content/PickupNew/PickupRow"]
+text = "Pick"
+
+[node name="PickupScene" type="CheckBox" parent="Content/PickupNew/PickupRow"]
+text = "Create Scene"
+
+[node name="PickupButton" type="Button" parent="Content/PickupNew"]
+text = "Create Pickup"
+
+[node name="EnemyNew" type="VBoxContainer" parent="Content"]
+
+[node name="EnemyLabel" type="Label" parent="Content/EnemyNew"]
+text = "Enemy"
+
+[node name="EnemyRow" type="HBoxContainer" parent="Content/EnemyNew"]
+
+[node name="EnemyId" type="LineEdit" parent="Content/EnemyNew/EnemyRow"]
+placeholder_text = "enemy_id"
+
+[node name="EnemyMod" type="LineEdit" parent="Content/EnemyNew/EnemyRow"]
+placeholder_text = "mod_id"
+
+[node name="EnemyAI" type="OptionButton" parent="Content/EnemyNew/EnemyRow"]
+
+[node name="EnemyScene" type="CheckBox" parent="Content/EnemyNew/EnemyRow"]
+text = "Create Scene"
+
+[node name="EnemyButton" type="Button" parent="Content/EnemyNew"]
+text = "Create Enemy"
+
+[node name="SurfaceNew" type="VBoxContainer" parent="Content"]
+
+[node name="SurfaceLabel" type="Label" parent="Content/SurfaceNew"]
+text = "Surface"
+
+[node name="SurfaceRow" type="HBoxContainer" parent="Content/SurfaceNew"]
+
+[node name="SurfaceId" type="LineEdit" parent="Content/SurfaceNew/SurfaceRow"]
+placeholder_text = "surface_id"
+
+[node name="SurfaceMod" type="LineEdit" parent="Content/SurfaceNew/SurfaceRow"]
+placeholder_text = "mod_id"
+
+[node name="SurfaceMaxSpeed" type="LineEdit" parent="Content/SurfaceNew/SurfaceRow"]
+placeholder_text = "max_speed_mult"
+
+[node name="SurfaceAccel" type="LineEdit" parent="Content/SurfaceNew/SurfaceRow"]
+placeholder_text = "accel_mult"
+
+[node name="SurfaceDecel" type="LineEdit" parent="Content/SurfaceNew/SurfaceRow"]
+placeholder_text = "decel_mult"
+
+[node name="SurfaceScene" type="CheckBox" parent="Content/SurfaceNew/SurfaceRow"]
+text = "Create Scene"
+
+[node name="SurfaceButton" type="Button" parent="Content/SurfaceNew"]
+text = "Create Surface"
+
+[node name="LadderNew" type="VBoxContainer" parent="Content"]
+
+[node name="LadderLabel" type="Label" parent="Content/LadderNew"]
+text = "Ladder"
+
+[node name="LadderRow" type="HBoxContainer" parent="Content/LadderNew"]
+
+[node name="LadderId" type="LineEdit" parent="Content/LadderNew/LadderRow"]
+placeholder_text = "ladder_id"
+
+[node name="LadderMod" type="LineEdit" parent="Content/LadderNew/LadderRow"]
+placeholder_text = "mod_id"
+
+[node name="LadderScene" type="CheckBox" parent="Content/LadderNew/LadderRow"]
+text = "Create Scene"
+
+[node name="LadderButton" type="Button" parent="Content/LadderNew"]
+text = "Create Ladder"
+
+[node name="Wizard" type="VBoxContainer" parent="Content"]
+
+[node name="WizardLabel" type="Label" parent="Content/Wizard"]
+text = "Quick Wizard"
+
+[node name="WizardRow" type="HBoxContainer" parent="Content/Wizard"]
+
+[node name="WizardGameId" type="LineEdit" parent="Content/Wizard/WizardRow"]
+placeholder_text = "game_id"
+
+[node name="WizardScene" type="LineEdit" parent="Content/Wizard/WizardRow"]
+placeholder_text = "scenes/main.tscn"
+
+[node name="WizardButton" type="Button" parent="Content/Wizard/WizardRow"]
+text = "Create Simple Game"
+
+[node name="SceneTools" type="VBoxContainer" parent="Content"]
+
+[node name="SceneLabel" type="Label" parent="Content/SceneTools"]
+text = "Scene Tools"
+
+[node name="SceneRow" type="HBoxContainer" parent="Content/SceneTools"]
+
+[node name="ScenePath" type="LineEdit" parent="Content/SceneTools/SceneRow"]
+placeholder_text = "scenes/main.tscn"
+
+[node name="ScenePick" type="Button" parent="Content/SceneTools/SceneRow"]
+text = "Pick Scene"
+
+[node name="OpenMods" type="Button" parent="Content/SceneTools/SceneRow"]
+text = "Open Mods"
+
+[node name="OpenPacks" type="Button" parent="Content/SceneTools/SceneRow"]
+text = "Open Packs"
+
+[node name="AddFloor" type="Button" parent="Content/SceneTools/SceneRow"]
+text = "Add Floor"
+
+[node name="AddPlayer" type="Button" parent="Content/SceneTools/SceneRow"]
+text = "Add Player"
+
+[node name="OpenScene" type="Button" parent="Content/SceneTools/SceneRow"]
+text = "Open Scene"
+
+[node name="Status" type="Label" parent="Content"]
+text = "Ready."
+
+[node name="PackPreview" type="TextEdit" parent="Content"]
+custom_minimum_size = Vector2(0, 140)
+readonly = true
+text = "Pack preview will appear here."

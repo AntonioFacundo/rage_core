@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bskjk4skpwh6y"]
+
+[ext_resource type="Script" uid="uid://bdtuaaig40gdq" path="res://addons/rage_core/presentation/debug_listener.gd" id="1"]
+
+[node name="LayeredMain" type="Node"]
+
+[node name="DebugListener" type="Node" parent="."]
+script = ExtResource("1")
+kernel_path = NodePath("/root/Kernel")

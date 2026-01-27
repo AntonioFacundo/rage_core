@@ -1,0 +1,2631 @@
+{
+    "pack_id":  "example.levels",
+    "contents":  [
+                     {
+                         "id":  "enemy.basic",
+                         "type":  "content.enemy",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "basic",
+                                                   "melee"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "enemy.ranged",
+                         "type":  "content.enemy",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "basic",
+                                                   "ranged"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "enemy.tank",
+                         "type":  "content.enemy",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "heavy",
+                                                   "melee"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "room.room01",
+                         "type":  "content.room",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room01"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "wave.room01.wave01",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room01",
+                                                   "wave01"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room01.wave02",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room01",
+                                                   "wave02"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room01.wave03",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room01",
+                                                   "wave03"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room01.wave04",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room01",
+                                                   "wave04"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room01.wave05",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room01",
+                                                   "wave05"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room01.wave06",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room01",
+                                                   "wave06"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room01.wave07",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room01",
+                                                   "wave07"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room01.wave08",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room01",
+                                                   "wave08"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room01.wave09",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room01",
+                                                   "wave09"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room01.wave10",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room01",
+                                                   "wave10"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "room.room02",
+                         "type":  "content.room",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room02"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "wave.room02.wave01",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room02",
+                                                   "wave01"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room02.wave02",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room02",
+                                                   "wave02"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room02.wave03",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room02",
+                                                   "wave03"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room02.wave04",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room02",
+                                                   "wave04"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room02.wave05",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room02",
+                                                   "wave05"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room02.wave06",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room02",
+                                                   "wave06"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room02.wave07",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room02",
+                                                   "wave07"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room02.wave08",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room02",
+                                                   "wave08"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room02.wave09",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room02",
+                                                   "wave09"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room02.wave10",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room02",
+                                                   "wave10"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "room.room03",
+                         "type":  "content.room",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room03"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "wave.room03.wave01",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room03",
+                                                   "wave01"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room03.wave02",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room03",
+                                                   "wave02"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room03.wave03",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room03",
+                                                   "wave03"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room03.wave04",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room03",
+                                                   "wave04"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room03.wave05",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room03",
+                                                   "wave05"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room03.wave06",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room03",
+                                                   "wave06"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room03.wave07",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room03",
+                                                   "wave07"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room03.wave08",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room03",
+                                                   "wave08"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room03.wave09",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room03",
+                                                   "wave09"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room03.wave10",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  1,
+                                      "tags":  [
+                                                   "room03",
+                                                   "wave10"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "room.room04",
+                         "type":  "content.room",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room04"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "wave.room04.wave01",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room04",
+                                                   "wave01"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room04.wave02",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room04",
+                                                   "wave02"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room04.wave03",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room04",
+                                                   "wave03"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room04.wave04",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room04",
+                                                   "wave04"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room04.wave05",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room04",
+                                                   "wave05"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room04.wave06",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room04",
+                                                   "wave06"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room04.wave07",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room04",
+                                                   "wave07"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room04.wave08",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room04",
+                                                   "wave08"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room04.wave09",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room04",
+                                                   "wave09"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room04.wave10",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room04",
+                                                   "wave10"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "room.room05",
+                         "type":  "content.room",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room05"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "wave.room05.wave01",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room05",
+                                                   "wave01"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room05.wave02",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room05",
+                                                   "wave02"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room05.wave03",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room05",
+                                                   "wave03"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room05.wave04",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room05",
+                                                   "wave04"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room05.wave05",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room05",
+                                                   "wave05"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room05.wave06",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room05",
+                                                   "wave06"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room05.wave07",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room05",
+                                                   "wave07"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room05.wave08",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room05",
+                                                   "wave08"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room05.wave09",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room05",
+                                                   "wave09"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room05.wave10",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room05",
+                                                   "wave10"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "room.room06",
+                         "type":  "content.room",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room06"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "wave.room06.wave01",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room06",
+                                                   "wave01"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room06.wave02",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room06",
+                                                   "wave02"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room06.wave03",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room06",
+                                                   "wave03"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room06.wave04",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room06",
+                                                   "wave04"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room06.wave05",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room06",
+                                                   "wave05"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room06.wave06",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room06",
+                                                   "wave06"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room06.wave07",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room06",
+                                                   "wave07"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room06.wave08",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room06",
+                                                   "wave08"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room06.wave09",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room06",
+                                                   "wave09"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room06.wave10",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  2,
+                                      "tags":  [
+                                                   "room06",
+                                                   "wave10"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  1
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "room.room07",
+                         "type":  "content.room",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room07"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "wave.room07.wave01",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room07",
+                                                   "wave01"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room07.wave02",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room07",
+                                                   "wave02"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room07.wave03",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room07",
+                                                   "wave03"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room07.wave04",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room07",
+                                                   "wave04"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room07.wave05",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room07",
+                                                   "wave05"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room07.wave06",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room07",
+                                                   "wave06"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room07.wave07",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room07",
+                                                   "wave07"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room07.wave08",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room07",
+                                                   "wave08"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room07.wave09",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room07",
+                                                   "wave09"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room07.wave10",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room07",
+                                                   "wave10"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "room.room08",
+                         "type":  "content.room",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room08"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "wave.room08.wave01",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room08",
+                                                   "wave01"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room08.wave02",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room08",
+                                                   "wave02"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room08.wave03",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room08",
+                                                   "wave03"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room08.wave04",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room08",
+                                                   "wave04"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room08.wave05",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room08",
+                                                   "wave05"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room08.wave06",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room08",
+                                                   "wave06"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room08.wave07",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room08",
+                                                   "wave07"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room08.wave08",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room08",
+                                                   "wave08"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room08.wave09",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room08",
+                                                   "wave09"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room08.wave10",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room08",
+                                                   "wave10"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "room.room09",
+                         "type":  "content.room",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room09"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "wave.room09.wave01",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room09",
+                                                   "wave01"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room09.wave02",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room09",
+                                                   "wave02"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room09.wave03",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room09",
+                                                   "wave03"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room09.wave04",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room09",
+                                                   "wave04"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room09.wave05",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room09",
+                                                   "wave05"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room09.wave06",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room09",
+                                                   "wave06"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room09.wave07",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room09",
+                                                   "wave07"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room09.wave08",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room09",
+                                                   "wave08"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room09.wave09",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room09",
+                                                   "wave09"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room09.wave10",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  3,
+                                      "tags":  [
+                                                   "room09",
+                                                   "wave10"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  2
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "room.room10",
+                         "type":  "content.room",
+                         "data":  {
+                                      "tier":  4,
+                                      "tags":  [
+                                                   "room10"
+                                               ],
+                                      "weight":  1
+                                  }
+                     },
+                     {
+                         "id":  "wave.room10.wave01",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  4,
+                                      "tags":  [
+                                                   "room10",
+                                                   "wave01"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room10.wave02",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  4,
+                                      "tags":  [
+                                                   "room10",
+                                                   "wave02"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room10.wave03",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  4,
+                                      "tags":  [
+                                                   "room10",
+                                                   "wave03"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room10.wave04",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  4,
+                                      "tags":  [
+                                                   "room10",
+                                                   "wave04"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room10.wave05",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  4,
+                                      "tags":  [
+                                                   "room10",
+                                                   "wave05"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room10.wave06",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  4,
+                                      "tags":  [
+                                                   "room10",
+                                                   "wave06"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room10.wave07",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  4,
+                                      "tags":  [
+                                                   "room10",
+                                                   "wave07"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room10.wave08",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  4,
+                                      "tags":  [
+                                                   "room10",
+                                                   "wave08"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  4
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  1
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room10.wave09",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  4,
+                                      "tags":  [
+                                                   "room10",
+                                                   "wave09"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  5
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     },
+                     {
+                         "id":  "wave.room10.wave10",
+                         "type":  "content.wave",
+                         "data":  {
+                                      "tier":  4,
+                                      "tags":  [
+                                                   "room10",
+                                                   "wave10"
+                                               ],
+                                      "weight":  1,
+                                      "spawns":  [
+                                                     {
+                                                         "enemy_id":  "enemy.basic",
+                                                         "count":  2
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.ranged",
+                                                         "count":  3
+                                                     },
+                                                     {
+                                                         "enemy_id":  "enemy.tank",
+                                                         "count":  3
+                                                     }
+                                                 ]
+                                  }
+                     }
+                 ]
+}

@@ -1,0 +1,88 @@
+{
+  "pack_id": "example.levels",
+  "contents": [
+    {
+      "id": "enemy.basic",
+      "type": "content.enemy",
+      "data": {
+        "tier": 1,
+        "tags": ["basic", "melee"],
+        "weight": 1
+      }
+    },
+    {
+      "id": "enemy.ranged",
+      "type": "content.enemy",
+      "data": {
+        "tier": 1,
+        "tags": ["basic", "ranged"],
+        "weight": 1
+      }
+    },
+    {
+      "id": "room.start",
+      "type": "content.room",
+      "data": {
+        "tier": 1,
+        "tags": ["start"],
+        "weight": 1
+      }
+    },
+    {
+      "id": "room.hall",
+      "type": "content.room",
+      "data": {
+        "tier": 1,
+        "tags": ["hall"],
+        "weight": 2
+      }
+    },
+    {
+      "id": "room.storage",
+      "type": "content.room",
+      "data": {
+        "tier": 1,
+        "tags": ["storage"],
+        "weight": 1
+      }
+    },
+    {
+      "id": "wave.start",
+      "type": "content.wave",
+      "data": {
+        "tier": 1,
+        "tags": ["start"],
+        "weight": 1,
+        "spawns": [
+          { "enemy_id": "enemy.basic", "count": 3 }
+        ]
+      }
+    }
+    ,
+    {
+      "id": "wave.hall",
+      "type": "content.wave",
+      "data": {
+        "tier": 1,
+        "tags": ["hall"],
+        "weight": 2,
+        "spawns": [
+          { "enemy_id": "enemy.basic", "count": 2 },
+          { "enemy_id": "enemy.ranged", "count": 1 }
+        ]
+      }
+    },
+    {
+      "id": "wave.storage",
+      "type": "content.wave",
+      "data": {
+        "tier": 1,
+        "tags": ["storage"],
+        "weight": 1,
+        "spawns": [
+          { "enemy_id": "enemy.ranged", "count": 2 }
+        ]
+      }
+    }
+  ]
+}
