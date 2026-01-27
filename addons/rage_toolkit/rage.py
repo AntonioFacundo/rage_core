@@ -452,6 +452,91 @@ def cmd_game_new(args: argparse.Namespace) -> None:
     print(f"created game scaffold: {mod_id} ({template})")
 
 
+def cmd_template_new(args: argparse.Namespace) -> None:
+    """Create a game from an internal template"""
+    root = project_root(args.root)
+    game_id = args.id
+    template_name = args.template_name
+    
+    # Get template directory
+    toolkit_path = _get_toolkit_path(root)
+    template_dir = os.path.join(toolkit_path, "templates", template_name)
+    
+    if not os.path.isdir(template_dir):
+        die(f"template not found: {template_name}")
+    
+    # Read template manifest
+    manifest_path = os.path.join(template_dir, "manifest.json")
+    if not os.path.exists(manifest_path):
+        die(f"template manifest not found: {manifest_path}")
+    
+    manifest = read_json(manifest_path)
+    
+    # Create game directory structure
+    ensure_dir(os.path.join(root, "game"))
+    ensure_dir(os.path.join(root, "mods"))
+    ensure_dir(os.path.join(root, "data_packs"))
+    if args.scene:
+        ensure_dir(os.path.join(root, "scenes", game_id))
+    
+    # Copy kernel
+    template_kernel = os.path.join(template_dir, "kernel.gd")
+    if os.path.exists(template_kernel):
+        with open(template_kernel, "r", encoding="utf-8") as f:
+            kernel_content = f.read()
+        kernel_path = os.path.join(root, "game", "game_kernel.gd")
+        write_file(kernel_path, kernel_content, args.force)
+        print(f"created kernel: {kernel_path}")
+    
+    # Create mod from template
+    template_mod = os.path.join(template_dir, "mod_base.gd")
+    if os.path.exists(template_mod):
+        mod_dir = os.path.join(root, "mods", game_id)
+        ensure_dir(mod_dir)
+        with open(template_mod, "r", encoding="utf-8") as f:
+            mod_content = f.read()
+        mod_path = os.path.join(mod_dir, f"mod_{game_id}.gd")
+        write_file(mod_path, mod_content, args.force)
+        
+        # Create mod manifest
+        mod_manifest = {
+            "id": game_id,
+            "version": "1.0.0",
+            "requires_core": "^1.0.0",
+            "requires_game": "^1.0.0",
+            "deps": {},
+            "load_order_hint": 0,
+        }
+        manifest_path_mod = os.path.join(mod_dir, "manifest.json")
+        write_json(manifest_path_mod, mod_manifest, args.force)
+        print(f"created mod: {mod_path}")
+    
+    # Create pack from template
+    template_pack = os.path.join(template_dir, "pack.json")
+    if os.path.exists(template_pack):
+        pack_data = read_json(template_pack)
+        # Update pack_id to match game_id
+        pack_data["pack_id"] = game_id
+        pack_path = os.path.join(root, "data_packs", f"{game_id}.json")
+        write_json(pack_path, pack_data, args.force)
+        print(f"created pack: {pack_path}")
+    
+    # Create base scene if requested
+    if args.scene:
+        scene_path = os.path.join(root, "scenes", game_id, "main.tscn")
+        scene_content = (
+            "[gd_scene format=3]\n"
+            "[node name=\"Main\" type=\"Node2D\"]\n"
+            "[node name=\"Player\" type=\"CharacterBody2D\" parent=\".\"]\n"
+            "[node name=\"Floor\" type=\"StaticBody2D\" parent=\".\"]\n"
+        )
+        write_file(scene_path, scene_content, args.force)
+        print(f"created scene: {scene_path}")
+    
+    print(f"created game '{game_id}' from template '{template_name}'")
+    print(f"Template includes: {', '.join(manifest.get('systems', []))}")
+
+
 def cmd_list_mods(args: argparse.Namespace) -> None:
     root = project_root(args.root)
     mods_path = os.path.join(root, "mods")
@@ -1028,6 +1113,14 @@ def main() -> None:
     game_new.add_argument("--scene", action="store_true")
     game_new.add_argument("--force", action="store_true")
     game_new.set_defaults(func=cmd_game_new)
+
+    template_new = sub.add_parser("template:new", help="Create a game from an internal template")
+    template_new.add_argument("id", help="Game ID")
+    template_new.add_argument("--from", dest="template_name", required=True, choices=["arena", "platformer", "roguelike", "topdown", "cards"], help="Template to use")
+    template_new.add_argument("--scene", action="store_true", help="Create a base scene")
+    template_new.add_argument("--force", action="store_true", help="Overwrite existing files")
+    template_new.add_argument("--root", default=".", help="Project root (default: current directory)")
+    template_new.set_defaults(func=cmd_template_new)
 
     scene_floor = sub.add_parser("scene:add_floor", help="Append a basic floor node to a scene")
     scene_floor.add_argument("--scene", required=True)

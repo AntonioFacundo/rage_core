@@ -1,0 +1,14 @@
+{
+  "pack_id": "base",
+  "contents": [
+    {
+      "id": "enemy_small",
+      "type": "content.enemy",
+      "data": {
+        "ai": "chase",
+        "health": 50,
+        "damage": 10
+      }
+    }
+  ]
+}

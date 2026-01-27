@@ -1,0 +1,24 @@
+{
+  "template_id": "platformer",
+  "name": "Platformer Game",
+  "description": "Plataformero básico con movimiento, saltos y pickups",
+  "systems": [
+    "movement_2d",
+    "combat",
+    "health",
+    "pickup",
+    "surface",
+    "ladder"
+  ],
+  "mods": [
+    "base"
+  ],
+  "packs": [
+    "base"
+  ],
+  "content": {
+    "enemies": [],
+    "pickups": ["pickup_speed"],
+    "surfaces": []
+  }
+}

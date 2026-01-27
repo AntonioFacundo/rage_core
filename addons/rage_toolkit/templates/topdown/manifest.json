@@ -1,0 +1,22 @@
+{
+  "template_id": "topdown",
+  "name": "Top-Down Game",
+  "description": "Juego top-down con combate y movimiento",
+  "systems": [
+    "movement_2d",
+    "combat",
+    "health",
+    "pickup",
+    "ai"
+  ],
+  "mods": [
+    "base"
+  ],
+  "packs": [
+    "base"
+  ],
+  "content": {
+    "enemies": ["enemy_small"],
+    "pickups": ["pickup_health"]
+  }
+}

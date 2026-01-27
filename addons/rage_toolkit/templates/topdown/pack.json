@@ -1,0 +1,23 @@
+{
+  "pack_id": "base",
+  "contents": [
+    {
+      "id": "enemy_small",
+      "type": "content.enemy",
+      "data": {
+        "ai": "patrol",
+        "health": 30,
+        "damage": 5
+      }
+    },
+    {
+      "id": "pickup_health",
+      "type": "content.pickup",
+      "data": {
+        "type": "health",
+        "effect": "heal",
+        "value": 20
+      }
+    }
+  ]
+}

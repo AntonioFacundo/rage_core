@@ -1,0 +1,15 @@
+{
+  "pack_id": "base",
+  "contents": [
+    {
+      "id": "pickup_speed",
+      "type": "content.pickup",
+      "data": {
+        "type": "speed",
+        "effect": "movement_speed_mult",
+        "value": 1.5,
+        "duration": 10.0
+      }
+    }
+  ]
+}

@@ -78,6 +78,12 @@ func _ready() -> void:
 	_game_template.add_item("melee_platformer")
 	_game_template.add_item("runner_basic")
 	_game_template.add_item("arena_basic")
+	# Internal templates
+	_game_template.add_item("arena (template)")
+	_game_template.add_item("platformer (template)")
+	_game_template.add_item("roguelike (template)")
+	_game_template.add_item("topdown (template)")
+	_game_template.add_item("cards (template)")
 
 	_enemy_ai.add_item("idle")
 	_enemy_ai.add_item("patrol")
@@ -334,6 +340,13 @@ func _modpack_new(mod_id: String, create_scene: bool) -> void:
 	_set_status("mod+pack created: " + mod_id)
 
 func _game_new(game_id: String, template: String, create_scene: bool) -> void:
+	# Check if it's an internal template
+	if template.ends_with(" (template)"):
+		var template_name := template.replace(" (template)", "")
+		_template_new_from_internal(game_id, template_name, create_scene)
+		return
+	
+	# Legacy templates
 	_modpack_new(game_id, create_scene)
 	match template:
 		"platformer_basic":
@@ -346,6 +359,91 @@ func _game_new(game_id: String, template: String, create_scene: bool) -> void:
 		"arena_basic":
 			_enemy_new("enemy_small", game_id, "chase", create_scene)
 	_set_status("game created: " + game_id)
+
+func _template_new_from_internal(game_id: String, template_name: String, create_scene: bool) -> void:
+	var template_dir := "res://addons/rage_toolkit/templates/" + template_name
+	if not DirAccess.dir_exists_absolute(template_dir):
+		_set_status("template not found: " + template_name)
+		return
+	
+	# Read template manifest
+	var manifest_path := template_dir + "/manifest.json"
+	if not FileAccess.file_exists(manifest_path):
+		_set_status("template manifest not found")
+		return
+	
+	var file := FileAccess.open(manifest_path, FileAccess.READ)
+	if not file:
+		_set_status("failed to read template manifest")
+		return
+	var manifest_text := file.get_as_text()
+	file.close()
+	var manifest := JSON.parse_string(manifest_text)
+	if not manifest:
+		_set_status("invalid template manifest")
+		return
+	
+	# Create directories
+	_ensure_dir("res://game")
+	_ensure_dir(MODS_DIR)
+	_ensure_dir(PACKS_DIR)
+	if create_scene:
+		_ensure_dir(SCENES_DIR + "/" + game_id)
+	
+	# Copy kernel
+	var template_kernel := template_dir + "/kernel.gd"
+	if FileAccess.file_exists(template_kernel):
+		file = FileAccess.open(template_kernel, FileAccess.READ)
+		if file:
+			var kernel_content := file.get_as_text()
+			file.close()
+			var kernel_path := "res://game/game_kernel.gd"
+			if _write_file(kernel_path, kernel_content):
+				_set_status("kernel created")
+	
+	# Copy mod
+	var template_mod := template_dir + "/mod_base.gd"
+	if FileAccess.file_exists(template_mod):
+		var mod_dir := MODS_DIR + "/" + game_id
+		_ensure_dir(mod_dir)
+		file = FileAccess.open(template_mod, FileAccess.READ)
+		if file:
+			var mod_content := file.get_as_text()
+			file.close()
+			var mod_path := mod_dir + "/mod_" + game_id + ".gd"
+			if _write_file(mod_path, mod_content):
+				# Create mod manifest
+				var mod_manifest := {
+					"id": game_id,
+					"version": "1.0.0",
+					"requires_core": "^1.0.0",
+					"requires_game": "^1.0.0",
+					"deps": {},
+					"load_order_hint": 0
+				}
+				var manifest_path_mod := mod_dir + "/manifest.json"
+				_write_json(manifest_path_mod, mod_manifest)
+	
+	# Copy pack
+	var template_pack := template_dir + "/pack.json"
+	if FileAccess.file_exists(template_pack):
+		file = FileAccess.open(template_pack, FileAccess.READ)
+		if file:
+			var pack_text := file.get_as_text()
+			file.close()
+			var pack_data := JSON.parse_string(pack_text)
+			if pack_data:
+				pack_data["pack_id"] = game_id
+				var pack_path := PACKS_DIR + "/" + game_id + ".json"
+				_write_json(pack_path, pack_data)
+	
+	# Create scene if requested
+	if create_scene:
+		var scene_path := SCENES_DIR + "/" + game_id + "/main.tscn"
+		_write_file(scene_path, _scene_base())
+	
+	var systems_list := manifest.get("systems", [])
+	_set_status("game created from template: " + game_id + " (systems: " + str(systems_list.size()) + ")")
 
 func _pickup_new(pickup_id: String, mod_id: String, sprite_path: String, sound_path: String, create_scene: bool) -> void:
 	var mod_dir := MODS_DIR + "/" + mod_id
@@ -663,15 +761,15 @@ func _system_complete(system_name: String, phase: String, priority: int, events:
 			var event_name_clean := event_name.strip_edges()
 			if event_name_clean == "":
 				continue
-			var class_name := _classify(event_name_clean + "Event")
+			var event_class_name := _classify(event_name_clean + "Event")
 			var event_file_name := event_name_clean.to_lower().replace(" ", "_").replace("-", "_")
-			event_preloads += "const " + class_name + " = preload(\"res://game/events/" + event_file_name + "_event.gd\")\n"
+			event_preloads += "const " + event_class_name + " = preload(\"res://game/events/" + event_file_name + "_event.gd\")\n"
 			var var_name := event_file_name
-			event_vars += "\tvar " + var_name + "_ev: " + class_name + "\n"
+			event_vars += "\tvar " + var_name + "_ev: " + event_class_name + "\n"
 		
-		var class_name := _classify(system_name)
+		var system_class_name := _classify(system_name)
 		system_content = "# Game: " + system_name + " system. Allowed deps: core types + game types.\n"
-		system_content += "class_name " + class_name + "System\n"
+		system_content += "class_name " + system_class_name + "System\n"
 		system_content += "extends SimulationStep\n\n"
 		system_content += event_preloads + "\n"
 		system_content += "func run(context: SimulationContext, delta: float) -> void:\n"
@@ -704,7 +802,7 @@ func _system_complete(system_name: String, phase: String, priority: int, events:
 	_set_status(msg)
 
 func _system_template(system_name: String, phase: String, priority: int) -> String:
-	var class_name := _classify(system_name)
+	var system_class_name := _classify(system_name)
 	var template := """# Game: {SYSTEM_NAME} system. Allowed deps: core types + game types.
 class_name {CLASS_NAME}System
 extends SimulationStep
@@ -714,13 +812,13 @@ func run(context: SimulationContext, delta: float) -> void:
 	pass
 """
 	template = template.replace("{SYSTEM_NAME}", system_name)
-	template = template.replace("{CLASS_NAME}", class_name)
+	template = template.replace("{CLASS_NAME}", system_class_name)
 	return template
 
 func _event_template(event_name: String, event_id: String) -> String:
 	if event_id == "":
 		event_id = "game." + event_name.to_lower().replace(" ", "_").replace("-", "_")
-	var class_name := _classify(event_name + "Event")
+	var event_class_name := _classify(event_name + "Event")
 	var template := """# Game: {EVENT_NAME} event payload. Uses Rage Core EventBase.
 class_name {CLASS_NAME}
 extends EventBase
@@ -738,14 +836,14 @@ func validate() -> Result:
 	return Result.ok_result(true)
 """
 	template = template.replace("{EVENT_NAME}", event_name)
-	template = template.replace("{CLASS_NAME}", class_name)
+	template = template.replace("{CLASS_NAME}", event_class_name)
 	template = template.replace("{EVENT_ID}", event_id)
 	return template
 
 func _command_template(command_name: String, command_id: String) -> String:
 	if command_id == "":
 		command_id = "cmd." + command_name.to_lower().replace(" ", "_").replace("-", "_")
-	var class_name := _classify(command_name + "Command")
+	var command_class_name := _classify(command_name + "Command")
 	var template := """# Game: {COMMAND_NAME} command. Allowed deps: core types + game types.
 class_name {CLASS_NAME}
 extends ICommand
@@ -768,7 +866,7 @@ func validate() -> Result:
 	return Result.ok_result(true)
 """
 	template = template.replace("{COMMAND_NAME}", command_name)
-	template = template.replace("{CLASS_NAME}", class_name)
+	template = template.replace("{CLASS_NAME}", command_class_name)
 	template = template.replace("{COMMAND_ID}", command_id)
 	return template
 

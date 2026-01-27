@@ -115,9 +115,29 @@ python rage.py game_system:new drops --mod base --template loot
 python rage.py game_system:new quests --mod base --template quest
 ```
 
+### template:new
+
+Create a game from an internal template (recommended for rapid game creation).
+
+Internal templates include complete kernel, systems, mods, and packs:
+- `arena` - Arena game with chasing enemies
+- `platformer` - Platformer with movement, jumps, and pickups
+- `roguelike` - Full roguelike with rooms, combat, economy, and progression
+- `topdown` - Top-down game with combat and movement
+- `cards` - Base structure for card games
+
+```bash
+python rage.py template:new <id> --from <template_name> [--scene] [--force]
+```
+
+Example:
+```bash
+python rage.py template:new my_platformer --from platformer --scene
+```
+
 ### game:new
 
-Create a game scaffold with a template.
+Create a game scaffold with a legacy template.
 
 Templates:
 - `custom`
@@ -129,6 +149,8 @@ Templates:
 ```bash
 python rage.py game:new <id> [--template custom|platformer_basic|melee_platformer] [--scene] [--force]
 ```
+
+**Note:** For new projects, prefer `template:new` which includes complete game setups.
 
 ### scene:add_floor
 

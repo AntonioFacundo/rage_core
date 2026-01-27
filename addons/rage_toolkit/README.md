@@ -62,6 +62,24 @@ Printable version:
 
 ## Rapid Game Prototyping Workflow
 
+### Using Internal Templates (Recommended)
+
+1) Create a game from an internal template
+```bash
+python rage.py template:new my_game --from platformer --scene
+```
+
+Internal templates include:
+- `arena` - Arena game with chasing enemies
+- `platformer` - Platformer with movement, jumps, and pickups
+- `roguelike` - Full roguelike with rooms, combat, economy, and progression
+- `topdown` - Top-down game with combat and movement
+- `cards` - Base structure for card games
+
+Each template includes a complete kernel, systems, mods, and packs configured.
+
+### Legacy Workflow
+
 1) Create a base scaffold
 ```bash
 python rage.py project:init --scene

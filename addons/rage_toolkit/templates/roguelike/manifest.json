@@ -1,0 +1,33 @@
+{
+  "template_id": "roguelike",
+  "name": "Roguelike Game",
+  "description": "Juego roguelike con salas, combate, economía y progresión",
+  "systems": [
+    "movement_2d",
+    "combat",
+    "health",
+    "pickup",
+    "room_combat",
+    "room_economy",
+    "shop_offer",
+    "shop_resolve",
+    "ability_award",
+    "parkour_gate",
+    "boss_stage",
+    "boss_reward",
+    "run_end",
+    "level_selection"
+  ],
+  "mods": [
+    "base"
+  ],
+  "packs": [
+    "base"
+  ],
+  "content": {
+    "enemies": [],
+    "pickups": [],
+    "rooms": [],
+    "levels": []
+  }
+}

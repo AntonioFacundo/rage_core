@@ -1,0 +1,15 @@
+{
+  "template_id": "cards",
+  "name": "Card Game",
+  "description": "Estructura base para juego de cartas",
+  "systems": [],
+  "mods": [
+    "base"
+  ],
+  "packs": [
+    "base"
+  ],
+  "content": {
+    "cards": []
+  }
+}

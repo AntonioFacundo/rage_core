@@ -1,0 +1,22 @@
+{
+  "template_id": "arena",
+  "name": "Arena Game",
+  "description": "Juego de arena con enemigos que persiguen al jugador",
+  "systems": [
+    "movement_2d",
+    "combat",
+    "health",
+    "pickup",
+    "ai"
+  ],
+  "mods": [
+    "base"
+  ],
+  "packs": [
+    "base"
+  ],
+  "content": {
+    "enemies": ["enemy_small"],
+    "pickups": []
+  }
+}
