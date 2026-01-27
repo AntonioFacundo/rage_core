@@ -2,11 +2,18 @@
 
 This CLI generates scaffolds for mods and content packs.
 
+**Location:** `addons/rage_toolkit/rage.py`
+
 ## Quick Start
 
 ```bash
+python addons/rage_toolkit/rage.py --root . mod:new base
+python addons/rage_toolkit/rage.py --root . pack:new base
+```
+
+Or from project root (if in PATH):
+```bash
 python rage.py --root . mod:new base
-python rage.py --root . pack:new base
 ```
 
 ## Commands
@@ -155,9 +162,83 @@ List content packs under `data_packs/`.
 python rage.py list:packs
 ```
 
+## New Metaprogramming Commands
+
+These commands use the same templates as the GDScript metaprogramming tools (`dev_tools/SystemGenerator`, `dev_tools/CodeGenerator`).
+
+### system:new
+
+Create a game system using SystemGenerator template.
+
+```bash
+python rage.py system:new <name> [--output game/systems] [--phase phase.gameplay] [--priority 50] [--force]
+```
+
+Example:
+```bash
+python rage.py system:new Combat --phase phase.gameplay --priority 50
+```
+
+### event:new
+
+Create an event using SystemGenerator template.
+
+```bash
+python rage.py event:new <name> [--event-id game.custom.id] [--output game/events] [--force]
+```
+
+Example:
+```bash
+python rage.py event:new DamageDealt --event-id game.combat.damage
+```
+
+### command:new
+
+Create a command using SystemGenerator template.
+
+```bash
+python rage.py command:new <name> [--command-id cmd.custom.id] [--output game/commands] [--force]
+```
+
+Example:
+```bash
+python rage.py command:new Move --command-id cmd.movement.move
+```
+
+### system:complete
+
+Create a complete system with events (CodeGenerator approach). Generates both the system and its events.
+
+```bash
+python rage.py system:complete <name> [--output game/systems] [--phase phase.gameplay] [--priority 50] [--events EVENT1 EVENT2 ...] [--force]
+```
+
+Example:
+```bash
+python rage.py system:complete Combat --events DamageDealt EnemyDefeated PlayerHit
+```
+
+This creates:
+- `game/systems/combat_system.gd`
+- `game/events/damage_dealt_event.gd`
+- `game/events/enemy_defeated_event.gd`
+- `game/events/player_hit_event.gd`
+
+### generate:script
+
+Generate a GDScript that uses CodeGenerator to create systems programmatically.
+
+```bash
+python rage.py generate:script [--output generate_systems.gd] [--force]
+```
+
+This creates a script you can run in Godot to use `CodeGenerator` and `SystemGenerator` classes.
+
 ## Notes
 
 - Mods and packs are available at `res://mods` and `res://data_packs`.
 - They are only loaded when your game kernel calls `_load_mods()` and `_load_content_packs()`.
 - Generated scenes are minimal stubs; add collisions/sprites in Godot.
+- New metaprogramming commands generate code compatible with `dev_tools/CodeGenerator` and `dev_tools/SystemGenerator`.
+- Use `system:complete` for rapid prototyping of systems with events.
 

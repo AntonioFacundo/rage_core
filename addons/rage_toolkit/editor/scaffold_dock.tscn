@@ -159,6 +159,91 @@ text = "Create Scene"
 [node name="LadderButton" type="Button" parent="Content/LadderNew"]
 text = "Create Ladder"
 
+[node name="MetaprogrammingLabel" type="Label" parent="Content"]
+text = "--- Metaprogramming Tools (Rapid Dev) ---"
+
+[node name="SystemNew" type="VBoxContainer" parent="Content"]
+
+[node name="SystemLabel" type="Label" parent="Content/SystemNew"]
+text = "System"
+
+[node name="SystemRow" type="HBoxContainer" parent="Content/SystemNew"]
+
+[node name="SystemName" type="LineEdit" parent="Content/SystemNew/SystemRow"]
+placeholder_text = "system_name"
+custom_minimum_size = Vector2(120, 0)
+
+[node name="SystemPhase" type="OptionButton" parent="Content/SystemNew/SystemRow"]
+custom_minimum_size = Vector2(120, 0)
+
+[node name="SystemPriority" type="LineEdit" parent="Content/SystemNew/SystemRow"]
+placeholder_text = "50"
+custom_minimum_size = Vector2(50, 0)
+
+[node name="SystemButton" type="Button" parent="Content/SystemNew"]
+text = "Create System"
+
+[node name="EventNew" type="VBoxContainer" parent="Content"]
+
+[node name="EventLabel" type="Label" parent="Content/EventNew"]
+text = "Event"
+
+[node name="EventRow" type="HBoxContainer" parent="Content/EventNew"]
+
+[node name="EventName" type="LineEdit" parent="Content/EventNew/EventRow"]
+placeholder_text = "event_name"
+custom_minimum_size = Vector2(150, 0)
+
+[node name="EventId" type="LineEdit" parent="Content/EventNew/EventRow"]
+placeholder_text = "event_id (optional)"
+size_flags_horizontal = 3
+
+[node name="EventButton" type="Button" parent="Content/EventNew"]
+text = "Create Event"
+
+[node name="CommandNew" type="VBoxContainer" parent="Content"]
+
+[node name="CommandLabel" type="Label" parent="Content/CommandNew"]
+text = "Command"
+
+[node name="CommandRow" type="HBoxContainer" parent="Content/CommandNew"]
+
+[node name="CommandName" type="LineEdit" parent="Content/CommandNew/CommandRow"]
+placeholder_text = "command_name"
+custom_minimum_size = Vector2(150, 0)
+
+[node name="CommandId" type="LineEdit" parent="Content/CommandNew/CommandRow"]
+placeholder_text = "command_id (optional)"
+size_flags_horizontal = 3
+
+[node name="CommandButton" type="Button" parent="Content/CommandNew"]
+text = "Create Command"
+
+[node name="SystemComplete" type="VBoxContainer" parent="Content"]
+
+[node name="SystemCompleteLabel" type="Label" parent="Content/SystemComplete"]
+text = "System Complete (with Events)"
+
+[node name="SystemCompleteRow" type="HBoxContainer" parent="Content/SystemComplete"]
+
+[node name="SystemCompleteName" type="LineEdit" parent="Content/SystemComplete/SystemCompleteRow"]
+placeholder_text = "system_name"
+custom_minimum_size = Vector2(120, 0)
+
+[node name="SystemCompletePhase" type="OptionButton" parent="Content/SystemComplete/SystemCompleteRow"]
+custom_minimum_size = Vector2(120, 0)
+
+[node name="SystemCompletePriority" type="LineEdit" parent="Content/SystemComplete/SystemCompleteRow"]
+placeholder_text = "50"
+custom_minimum_size = Vector2(50, 0)
+
+[node name="SystemCompleteEvents" type="LineEdit" parent="Content/SystemComplete/SystemCompleteRow"]
+placeholder_text = "Event1 Event2 Event3 (space-separated)"
+size_flags_horizontal = 3
+
+[node name="SystemCompleteButton" type="Button" parent="Content/SystemComplete"]
+text = "Create System + Events"
+
 [node name="Wizard" type="VBoxContainer" parent="Content"]
 
 [node name="WizardLabel" type="Label" parent="Content/Wizard"]

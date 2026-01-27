@@ -124,6 +124,10 @@ func load_state(key: String) -> Result:
 	return _save_manager.load_state(_state, key)
 
 func _validate_event_id(event_id: String) -> Result:
-	if not GameConstants.EVENT_IDS.has(event_id):
-		return Result.err_result("Unknown event id: " + event_id)
-	return Result.ok_result(true)
+	# Allow core events and custom events (game.* or mod.*)
+	# This enables extensibility without modifying the core
+	if GameConstants.EVENT_IDS.has(event_id):
+		return Result.ok_result(true)
+	if event_id.begins_with("game.") or event_id.begins_with("mod."):
+		return Result.ok_result(true)
+	return Result.err_result("Unknown event id: " + event_id + " (must be in EVENT_IDS or start with 'game.' or 'mod.')")

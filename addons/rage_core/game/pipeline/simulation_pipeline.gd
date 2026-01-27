@@ -4,6 +4,8 @@ class_name SimulationPipeline
 var _steps := []
 var _seq_counter: int = 0
 var _phase_order := {}
+var _sorted_steps: Array = []
+var _dirty: bool = true
 
 func register_step(phase_id: String, priority: int, step: SimulationStep) -> Result:
 	if not GameConstants.PHASE_IDS.has(phase_id):
@@ -17,16 +19,19 @@ func register_step(phase_id: String, priority: int, step: SimulationStep) -> Res
 		"step": step,
 		"seq": _seq_counter
 	})
+	_dirty = true  # Mark as needing re-sort
 	return Result.ok_result(true)
 
 func clear() -> void:
 	_steps.clear()
+	_sorted_steps.clear()
 	_seq_counter = 0
+	_dirty = true
 
 func run(context: SimulationContext, delta: float) -> void:
 	_ensure_phase_order()
-	_steps.sort_custom(_step_before)
-	for entry in _steps:
+	_ensure_sorted()  # Only sort when dirty
+	for entry in _sorted_steps:
 		var step: SimulationStep = entry["step"]
 		step.run(context, delta)
 
@@ -56,3 +61,10 @@ func _ensure_phase_order() -> void:
 		return
 	for i in range(GameConstants.PHASE_IDS.size()):
 		_phase_order[GameConstants.PHASE_IDS[i]] = i
+
+func _ensure_sorted() -> void:
+	if not _dirty:
+		return
+	_sorted_steps = _steps.duplicate()
+	_sorted_steps.sort_custom(_step_before)
+	_dirty = false

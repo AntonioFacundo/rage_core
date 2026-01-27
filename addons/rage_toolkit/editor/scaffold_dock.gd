@@ -54,6 +54,23 @@ const SCENES_DIR := "res://scenes"
 @onready var _file_dialog: FileDialog = FileDialog.new()
 var _file_dialog_mode: String = "scene"
 
+# Metaprogramming UI elements
+@onready var _system_name: LineEdit = $SystemNew/SystemRow/SystemName
+@onready var _system_phase: OptionButton = $SystemNew/SystemRow/SystemPhase
+@onready var _system_priority: LineEdit = $SystemNew/SystemRow/SystemPriority
+@onready var _system_button: Button = $SystemNew/SystemButton
+@onready var _event_name: LineEdit = $EventNew/EventRow/EventName
+@onready var _event_id: LineEdit = $EventNew/EventRow/EventId
+@onready var _event_button: Button = $EventNew/EventButton
+@onready var _command_name: LineEdit = $CommandNew/CommandRow/CommandName
+@onready var _command_id: LineEdit = $CommandNew/CommandRow/CommandId
+@onready var _command_button: Button = $CommandNew/CommandButton
+@onready var _system_complete_name: LineEdit = $SystemComplete/SystemCompleteRow/SystemCompleteName
+@onready var _system_complete_phase: OptionButton = $SystemComplete/SystemCompleteRow/SystemCompletePhase
+@onready var _system_complete_priority: LineEdit = $SystemComplete/SystemCompleteRow/SystemCompletePriority
+@onready var _system_complete_events: LineEdit = $SystemComplete/SystemCompleteRow/SystemCompleteEvents
+@onready var _system_complete_button: Button = $SystemComplete/SystemCompleteButton
+
 func _ready() -> void:
 	_disable_auto_translate(self)
 	_game_template.add_item("custom")
@@ -65,6 +82,18 @@ func _ready() -> void:
 	_enemy_ai.add_item("idle")
 	_enemy_ai.add_item("patrol")
 	_enemy_ai.add_item("chase")
+
+	# Metaprogramming phase options
+	_system_phase.add_item("phase.input")
+	_system_phase.add_item("phase.movement")
+	_system_phase.add_item("phase.gameplay")
+	_system_phase.add_item("phase.post")
+	_system_phase.selected = 2  # Default to gameplay
+	_system_complete_phase.add_item("phase.input")
+	_system_complete_phase.add_item("phase.movement")
+	_system_complete_phase.add_item("phase.gameplay")
+	_system_complete_phase.add_item("phase.post")
+	_system_complete_phase.selected = 2  # Default to gameplay
 
 	_project_init_button.pressed.connect(_on_project_init)
 	_modpack_button.pressed.connect(_on_modpack_new)
@@ -82,6 +111,12 @@ func _ready() -> void:
 	_open_packs.pressed.connect(func(): _open_folder(PACKS_DIR))
 	_pickup_sprite_pick.pressed.connect(_on_pickup_sprite_pick)
 	_pickup_sound_pick.pressed.connect(_on_pickup_sound_pick)
+	
+	# Metaprogramming button connections
+	_system_button.pressed.connect(_on_system_new)
+	_event_button.pressed.connect(_on_event_new)
+	_command_button.pressed.connect(_on_command_new)
+	_system_complete_button.pressed.connect(_on_system_complete)
 	# Force English labels in Scene Tools.
 	$Options/OverwriteLabel.text = "Overwrite"
 	_overwrite.text = "Enable"
@@ -493,12 +528,14 @@ func _ensure_dir(path: String) -> void:
 	DirAccess.make_dir_recursive_absolute(path)
 
 func _classify(value: String) -> String:
-	var parts := value.split("_", false)
+	# Convert to PascalCase, matching SystemGenerator._to_class_name behavior
+	# Handle spaces, underscores, and hyphens
+	var normalized := value.replace("-", " ").replace("_", " ")
+	var parts := normalized.split(" ", false)
 	var out := ""
 	for part in parts:
-		if part.length() == 0:
-			continue
-		out += part.substr(0, 1).to_upper() + part.substr(1)
+		if part.length() > 0:
+			out += part.capitalize()
 	return out
 
 func _parse_float(text: String, default_value: float) -> float:
@@ -526,4 +563,219 @@ func _can_write(path: String) -> bool:
 
 func _set_status(message: String) -> void:
 	_status.text = message
+
+# ============================================================================
+# Metaprogramming Functions (using SystemGenerator templates)
+# ============================================================================
+
+func _on_system_new() -> void:
+	var system_name := _system_name.text.strip_edges()
+	if not _is_valid_id(system_name):
+		_set_status("system name required")
+		_system_name.add_theme_color_override("font_color", Color(1, 0.2, 0.2))
+		return
+	_system_name.add_theme_color_override("font_color", Color(1, 1, 1))
+	var phase := _system_phase.get_item_text(_system_phase.selected)
+	var priority := _parse_int(_system_priority.text, 50)
+	_system_new(system_name, phase, priority)
+
+func _on_event_new() -> void:
+	var event_name := _event_name.text.strip_edges()
+	if not _is_valid_id(event_name):
+		_set_status("event name required")
+		_event_name.add_theme_color_override("font_color", Color(1, 0.2, 0.2))
+		return
+	_event_name.add_theme_color_override("font_color", Color(1, 1, 1))
+	var event_id := _event_id.text.strip_edges()
+	_event_new(event_name, event_id)
+
+func _on_command_new() -> void:
+	var command_name := _command_name.text.strip_edges()
+	if not _is_valid_id(command_name):
+		_set_status("command name required")
+		_command_name.add_theme_color_override("font_color", Color(1, 0.2, 0.2))
+		return
+	_command_name.add_theme_color_override("font_color", Color(1, 1, 1))
+	var command_id := _command_id.text.strip_edges()
+	_command_new(command_name, command_id)
+
+func _on_system_complete() -> void:
+	var system_name := _system_complete_name.text.strip_edges()
+	if not _is_valid_id(system_name):
+		_set_status("system name required")
+		_system_complete_name.add_theme_color_override("font_color", Color(1, 0.2, 0.2))
+		return
+	_system_complete_name.add_theme_color_override("font_color", Color(1, 1, 1))
+	var phase := _system_complete_phase.get_item_text(_system_complete_phase.selected)
+	var priority := _parse_int(_system_complete_priority.text, 50)
+	var events_text := _system_complete_events.text.strip_edges()
+	var events: Array = []
+	if events_text != "":
+		events = events_text.split(" ", false)
+		for i in range(events.size()):
+			events[i] = events[i].strip_edges()
+	_system_complete(system_name, phase, priority, events)
+
+func _system_new(system_name: String, phase: String, priority: int) -> void:
+	var systems_dir := "res://game/systems"
+	_ensure_dir(systems_dir)
+	var file_name := system_name.to_lower().replace(" ", "_").replace("-", "_")
+	var system_path := systems_dir + "/" + file_name + "_system.gd"
+	var content := _system_template(system_name, phase, priority)
+	if not _write_file(system_path, content):
+		return
+	_set_status("✅ System created: " + system_path + "\n   Register in game_kernel.gd or use CodeGenerator.generate_and_register_system()")
+
+func _event_new(event_name: String, event_id: String) -> void:
+	var events_dir := "res://game/events"
+	_ensure_dir(events_dir)
+	var file_name := event_name.to_lower().replace(" ", "_").replace("-", "_")
+	var event_path := events_dir + "/" + file_name + "_event.gd"
+	var content := _event_template(event_name, event_id)
+	if not _write_file(event_path, content):
+		return
+	var final_id := event_id if event_id != "" else "game." + file_name
+	_set_status("✅ Event created: " + event_path + "\n   Event ID: " + final_id)
+
+func _command_new(command_name: String, command_id: String) -> void:
+	var commands_dir := "res://game/commands"
+	_ensure_dir(commands_dir)
+	var file_name := command_name.to_lower().replace(" ", "_").replace("-", "_")
+	var command_path := commands_dir + "/" + file_name + "_command.gd"
+	var content := _command_template(command_name, command_id)
+	if not _write_file(command_path, content):
+		return
+	var final_id := command_id if command_id != "" else "cmd." + file_name
+	_set_status("✅ Command created: " + command_path + "\n   Command ID: " + final_id)
+
+func _system_complete(system_name: String, phase: String, priority: int, events: Array) -> void:
+	var systems_dir := "res://game/systems"
+	_ensure_dir(systems_dir)
+	var file_name := system_name.to_lower().replace(" ", "_").replace("-", "_")
+	var system_path := systems_dir + "/" + file_name + "_system.gd"
+	
+	# Generate system with events if provided
+	var system_content: String
+	if events.size() > 0:
+		var event_preloads := ""
+		var event_vars := ""
+		for event_name in events:
+			var event_name_clean := event_name.strip_edges()
+			if event_name_clean == "":
+				continue
+			var class_name := _classify(event_name_clean + "Event")
+			var event_file_name := event_name_clean.to_lower().replace(" ", "_").replace("-", "_")
+			event_preloads += "const " + class_name + " = preload(\"res://game/events/" + event_file_name + "_event.gd\")\n"
+			var var_name := event_file_name
+			event_vars += "\tvar " + var_name + "_ev: " + class_name + "\n"
+		
+		var class_name := _classify(system_name)
+		system_content = "# Game: " + system_name + " system. Allowed deps: core types + game types.\n"
+		system_content += "class_name " + class_name + "System\n"
+		system_content += "extends SimulationStep\n\n"
+		system_content += event_preloads + "\n"
+		system_content += "func run(context: SimulationContext, delta: float) -> void:\n"
+		system_content += "\t# TODO: Implement " + system_name + " logic\n"
+		system_content += event_vars
+		system_content += "\tpass\n"
+	else:
+		system_content = _system_template(system_name, phase, priority)
+	
+	if not _write_file(system_path, system_content):
+		return
+	
+	# Generate event files
+	var events_dir := "res://game/events"
+	_ensure_dir(events_dir)
+	for event_name in events:
+		var event_name_clean := event_name.strip_edges()
+		if event_name_clean == "":
+			continue
+		var event_file_name := event_name_clean.to_lower().replace(" ", "_").replace("-", "_")
+		var event_path := events_dir + "/" + event_file_name + "_event.gd"
+		var event_content := _event_template(event_name_clean, "")
+		if not _write_file(event_path, event_content):
+			continue
+	
+	var msg := "✅ System created: " + system_path
+	if events.size() > 0:
+		msg += "\n   ✅ " + str(events.size()) + " event(s) created in res://game/events/"
+	msg += "\n   Register in game_kernel.gd or use CodeGenerator.generate_and_register_system()"
+	_set_status(msg)
+
+func _system_template(system_name: String, phase: String, priority: int) -> String:
+	var class_name := _classify(system_name)
+	var template := """# Game: {SYSTEM_NAME} system. Allowed deps: core types + game types.
+class_name {CLASS_NAME}System
+extends SimulationStep
+
+func run(context: SimulationContext, delta: float) -> void:
+	# TODO: Implement {SYSTEM_NAME} logic
+	pass
+"""
+	template = template.replace("{SYSTEM_NAME}", system_name)
+	template = template.replace("{CLASS_NAME}", class_name)
+	return template
+
+func _event_template(event_name: String, event_id: String) -> String:
+	if event_id == "":
+		event_id = "game." + event_name.to_lower().replace(" ", "_").replace("-", "_")
+	var class_name := _classify(event_name + "Event")
+	var template := """# Game: {EVENT_NAME} event payload. Uses Rage Core EventBase.
+class_name {CLASS_NAME}
+extends EventBase
+
+const ID := "{EVENT_ID}"
+
+func _init() -> void:
+	super._init(ID)
+	payload = {
+		# TODO: Add event payload fields
+	}
+
+func validate() -> Result:
+	# TODO: Add validation logic
+	return Result.ok_result(true)
+"""
+	template = template.replace("{EVENT_NAME}", event_name)
+	template = template.replace("{CLASS_NAME}", class_name)
+	template = template.replace("{EVENT_ID}", event_id)
+	return template
+
+func _command_template(command_name: String, command_id: String) -> String:
+	if command_id == "":
+		command_id = "cmd." + command_name.to_lower().replace(" ", "_").replace("-", "_")
+	var class_name := _classify(command_name + "Command")
+	var template := """# Game: {COMMAND_NAME} command. Allowed deps: core types + game types.
+class_name {CLASS_NAME}
+extends ICommand
+
+const ID := "{COMMAND_ID}"
+
+var _entity_id: String
+# TODO: Add command fields
+
+func _init(entity_id: String) -> void:
+	_entity_id = entity_id
+
+func get_id() -> String:
+	return ID
+
+func validate() -> Result:
+	if not Ids.is_valid_id(_entity_id):
+		return Result.err_result("Invalid entity_id")
+	# TODO: Add more validation
+	return Result.ok_result(true)
+"""
+	template = template.replace("{COMMAND_NAME}", command_name)
+	template = template.replace("{CLASS_NAME}", class_name)
+	template = template.replace("{COMMAND_ID}", command_id)
+	return template
+
+func _parse_int(text: String, default_value: int) -> int:
+	if text.strip_edges() == "":
+		return default_value
+	if not text.is_valid_int():
+		return default_value
+	return int(text)
 

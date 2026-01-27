@@ -3,17 +3,48 @@
 Rage Toolkit is an optional editor/CLI layer for Rage Core.
 It provides scaffolding UI and the `rage.py` CLI to generate mods, packs, and scenes.
 
-## Plugin Setup
+⚠️ **REQUIRES**: Rage Core addon must be installed first.
 
-1) Copy `addons/rage_toolkit/` into your project.
-2) Enable **Rage Toolkit** in Project Settings -> Plugins.
+## Installation
+
+### From Asset Library (Recommended)
+1. Install **Rage Core** from Asset Library
+2. Install **Rage Toolkit** from Asset Library
+3. Enable both plugins in Project Settings -> Plugins
+
+### Manual Installation
+1. Copy `addons/rage_core/` into your project
+2. Copy `addons/rage_toolkit/` into your project
+3. Enable **Rage Core** in Project Settings -> Plugins
+4. Enable **Rage Toolkit** in Project Settings -> Plugins
 
 Note: Replay mode is configured in **Rage Core** (see `addons/rage_core/README.md`).
 Note: Game-specific code lives in `game/` and the project kernel should be `res://game/game_kernel.gd`.
 
 ## CLI
 
-See `CLI.md` for commands.
+The CLI tool `rage.py` is located in `addons/rage_toolkit/rage.py`.
+
+**Usage:**
+```bash
+python addons/rage_toolkit/rage.py <command>
+```
+
+Or from project root (if rage.py is in PATH):
+```bash
+python rage.py <command>
+```
+
+See `CLI.md` for all commands.
+
+**New Metaprogramming Commands:**
+- `system:new` - Create a game system using SystemGenerator template
+- `event:new` - Create an event using SystemGenerator template
+- `command:new` - Create a command using SystemGenerator template
+- `system:complete` - Create a complete system with events (CodeGenerator approach)
+- `generate:script` - Generate a GDScript that uses CodeGenerator
+
+These commands use the same templates as the GDScript metaprogramming tools in `dev_tools/`.
 
 ## Tutorial
 

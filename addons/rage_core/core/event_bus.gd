@@ -6,6 +6,15 @@ var _token_counter: int = 0
 var _order_counter: int = 0
 
 func subscribe(event_id: String, handler: Callable, priority: int = 0, intercept: bool = false) -> int:
+	# Check for duplicate handlers to prevent accidental double-subscription
+	if _handlers.has(event_id):
+		for existing_entry in _handlers[event_id]:
+			# Compare callables by checking if they reference the same object and method
+			var existing_handler: Callable = existing_entry["handler"]
+			if existing_handler == handler:
+				# Same handler already subscribed, return existing token
+				return existing_entry["token"]
+	
 	_token_counter += 1
 	var token := _token_counter
 	var entry := {

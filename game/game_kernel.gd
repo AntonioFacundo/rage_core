@@ -14,6 +14,8 @@ var _parkour_gate_system: ParkourGateSystem
 var _boss_stage_system: BossStageSystem
 var _boss_reward_system: BossRewardSystem
 var _run_end_system: RunEndSystem
+var _health_system: HealthSystem
+var _health_manager: HealthManager
 var _auto_reset: bool = true
 
 func _ready() -> void:
@@ -35,6 +37,9 @@ func _ready() -> void:
 	# Gameplay systems (combat, pickups, surfaces, ladders).
 	_combat_system = CombatSystem.new()
 	_pipeline.register_step(GameConstants.PHASE_GAMEPLAY, 50, _combat_system)
+	_health_system = HealthSystem.new()
+	_pipeline.register_step(GameConstants.PHASE_GAMEPLAY, 15, _health_system)
+	_health_manager = HealthManager.new(_api, _health_system)
 	_pickup_system = PickupSystem.new()
 	_pipeline.register_step(GameConstants.PHASE_GAMEPLAY, 40, _pickup_system)
 	_surface_system = SurfaceSystem.new()
@@ -79,6 +84,9 @@ func _ready() -> void:
 
 func get_run_state() -> RunState:
 	return _run_state
+
+func get_health_manager() -> HealthManager:
+	return _health_manager
 
 func _load_content_packs() -> void:
 	super._load_content_packs()

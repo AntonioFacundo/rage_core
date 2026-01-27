@@ -8,7 +8,7 @@ Objetivo: saber los pasos desde el scaffold/CLI hasta el codigo que debes editar
 Un dev ejecutaria estos comandos en la raiz del repo:
 
 ```bash
-python rage.py project:init --scene
+python addons/rage_toolkit/rage.py project:init --scene
 ```
 
 Esto crea (si no existen):
@@ -53,7 +53,7 @@ El pack JSON o el codigo del mod solo referencian esas rutas.
 Un dev ejecutaria:
 
 ```bash
-python rage.py modpack:new base --scene
+python addons/rage_toolkit/rage.py modpack:new base --scene
 ```
 
 Esto crea:
