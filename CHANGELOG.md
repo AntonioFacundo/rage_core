@@ -1,9 +1,15 @@
-﻿# Changelog
+# Changelog
 
 All notable changes to Rage Core and Rage Toolkit will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.0.1] - 2026-01-27
+
+### Fixed
+- Health system: removed global identifier shadowing (preload constants renamed/removed)
+- Health system: silenced unused parameter warnings
 
 ## [1.0.0] - 2025-01-27
 
@@ -21,7 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added - Rage Toolkit
 - Editor UI (Scaffold Dock) for no-code file generation
-- CLI tool (\age.py\) for scaffolding
+- CLI tool (\
+age.py\) for scaffolding
 - Metaprogramming tools:
   - \SystemGenerator\ - Generate system/event/command templates
   - \CodeGenerator\ - Full system generation with file writing

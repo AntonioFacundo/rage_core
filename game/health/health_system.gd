@@ -2,9 +2,9 @@
 class_name HealthSystem
 extends SimulationStep
 
-const HealthChangedEvent = preload("res://game/health/events/health_changed_event.gd")
-const DeathEvent = preload("res://game/health/events/death_event.gd")
-const HealEvent = preload("res://game/health/events/heal_event.gd")
+const HealthChangedEventScript := preload("res://game/health/events/health_changed_event.gd")
+const DeathEventScript := preload("res://game/health/events/death_event.gd")
+const HealEventScript := preload("res://game/health/events/heal_event.gd")
 
 var _health_state: HealthState
 
@@ -42,7 +42,7 @@ func _process_regeneration(context: SimulationContext, delta: float) -> void:
 				_emit_health_changed(context, entity_id, old_health, new_health, max_hp, "regen")
 				# Emitir evento de curación también
 				if new_health > old_health:
-					var heal_ev: HealEvent = HealEvent.new(entity_id, new_health - old_health, "regen", [])
+					var heal_ev: HealEvent = HealEventScript.new(entity_id, new_health - old_health, "regen", [])
 					var result := context.bus.emit(heal_ev)
 					if not result.ok:
 						context.logger.error("HealthSystem heal event failed: " + str(result.error))
@@ -58,12 +58,12 @@ func _check_deaths(context: SimulationContext) -> void:
 				_health_state.set_last_death_tick(entity_id, 0)  # TODO: obtener tick real
 				_emit_death(context, entity_id, "", "health_zero")
 
-func _listen_to_damage_events(context: SimulationContext) -> void:
+func _listen_to_damage_events(_context: SimulationContext) -> void:
 	# Este método se suscribe a eventos de daño para emitir eventos de cambio de vida
 	# La suscripción se hace en el kernel, no aquí
 	pass
 
-func _apply_heal(context: SimulationContext, entity_id: String, amount: int, source: String) -> void:
+func _apply_heal(context: SimulationContext, entity_id: String, amount: int, _source: String) -> void:
 	var current: int = context.state.get_health(entity_id)
 	var max_hp: int = _health_state.get_max_health(entity_id)
 	if max_hp > 0:
@@ -72,13 +72,13 @@ func _apply_heal(context: SimulationContext, entity_id: String, amount: int, sou
 		context.state.set_health(entity_id, current + amount)
 
 func _emit_health_changed(context: SimulationContext, entity_id: String, old_health: int, new_health: int, max_health: int, source: String) -> void:
-	var ev: HealthChangedEvent = HealthChangedEvent.new(entity_id, old_health, new_health, max_health, source)
+	var ev: HealthChangedEvent = HealthChangedEventScript.new(entity_id, old_health, new_health, max_health, source)
 	var result := context.bus.emit(ev)
 	if not result.ok:
 		context.logger.error("HealthSystem health_changed event failed: " + str(result.error))
 
 func _emit_death(context: SimulationContext, entity_id: String, killer_id: String, cause: String) -> void:
-	var ev: DeathEvent = DeathEvent.new(entity_id, killer_id, cause)
+	var ev: DeathEvent = DeathEventScript.new(entity_id, killer_id, cause)
 	var result := context.bus.emit(ev)
 	if not result.ok:
 		context.logger.error("HealthSystem death event failed: " + str(result.error))

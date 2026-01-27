@@ -1,10 +1,8 @@
 # Game: Health manager facade. Uses GameAPI and HealthSystem.
 class_name HealthManager
 
-const HealthChangedEvent = preload("res://game/health/events/health_changed_event.gd")
-const DeathEvent = preload("res://game/health/events/death_event.gd")
-const HealEvent = preload("res://game/health/events/heal_event.gd")
-const DamageEvent = preload("res://addons/rage_core/game/events/damage_event.gd")
+const HealthChangedEventScript := preload("res://game/health/events/health_changed_event.gd")
+const HealEventScript := preload("res://game/health/events/heal_event.gd")
 
 var _api: GameAPI
 var _health_system: HealthSystem
@@ -33,12 +31,12 @@ func _on_damage_received(ev: DamageEvent) -> void:
 	if max_health <= 0:
 		max_health = new_health  # Fallback
 	if old_health != new_health:
-		var health_ev: HealthChangedEvent = HealthChangedEvent.new(target_id, old_health, new_health, max_health, "damage")
+		var health_ev: HealthChangedEvent = HealthChangedEventScript.new(target_id, old_health, new_health, max_health, "damage")
 		var result := _api.emit(health_ev)
 		if not result.ok:
 			_api.get_logger().error("HealthManager: failed to emit health_changed event: " + str(result.error))
 
-func set_max_health(entity_id: String, value: int, source: String = "") -> void:
+func set_max_health(entity_id: String, value: int, _source: String = "") -> void:
 	if value <= 0:
 		return
 	var old_max: int = _health_state.get_max_health(entity_id)
@@ -58,7 +56,7 @@ func set_health_regen_rate(entity_id: String, rate: float) -> void:
 func apply_heal(entity_id: String, amount: int, source: String = "", tags: Array = []) -> void:
 	if amount <= 0:
 		return
-	var ev: HealEvent = HealEvent.new(entity_id, amount, source, tags)
+	var ev: HealEvent = HealEventScript.new(entity_id, amount, source, tags)
 	var result := _api.emit(ev)
 	if not result.ok:
 		_api.get_logger().error("HealthManager: failed to emit heal event: " + str(result.error))
@@ -74,7 +72,7 @@ func apply_heal(entity_id: String, amount: int, source: String = "", tags: Array
 		new_health = old_health + ev.get_amount()
 	_api.get_state().set_health(entity_id, new_health)
 	if old_health != new_health:
-		var health_ev: HealthChangedEvent = HealthChangedEvent.new(entity_id, old_health, new_health, max_hp, source)
+		var health_ev: HealthChangedEvent = HealthChangedEventScript.new(entity_id, old_health, new_health, max_hp, source)
 		var health_result := _api.emit(health_ev)
 		if not health_result.ok:
 			_api.get_logger().error("HealthManager: failed to emit health_changed event: " + str(health_result.error))

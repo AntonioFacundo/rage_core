@@ -1,7 +1,7 @@
-﻿# Script para crear ZIPs de release
+# Script para crear ZIPs de release
 # Ejecutar desde la raiz del proyecto
 
-$version = "1.0.0"
+$version = "1.0.1"
 $projectRoot = $PSScriptRoot
 
 Write-Host "Creando ZIPs para release v$version..."
