@@ -222,14 +222,14 @@ El kernel descubre scripts de mods en `res://mods`, obtiene sus manifests, resue
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f3e5f5','primaryTextColor':'#4a148c','primaryBorderColor':'#7b1fa2','lineColor':'#37474f','secondaryColor':'#f5f5f5','tertiaryColor':'#ffffff','background':'#ffffff','mainBkg':'#ffffff','textColor':'#212121'}}}%%
 flowchart TB
-    A[Descubrir mods en res://mods] --> B[Recolectar manifests]
-    B --> C[ModLoader.resolve_order]
-    C --> D{¿Orden válido?}
-    D -->|No| E[Log error, no cargar mods]
-    D -->|Sí| F[Por cada mod en orden]
-    F --> G[Validar requires_core, requires_game, deps]
-    G --> H[mod.on_load(api)]
-    H --> I[Registro en EventBus, etc.]
+    A["Descubrir mods en res://mods"] --> B["Recolectar manifests"]
+    B --> C["ModLoader.resolve_order"]
+    C --> D{"Orden valido?"}
+    D -->|No| E["Log error, no cargar mods"]
+    D -->|Si| F["Por cada mod en orden"]
+    F --> G["Validar requires_core, requires_game, deps"]
+    G --> H["mod.on_load(api)"]
+    H --> I["Registro en EventBus, etc."]
     I --> F
 ```
 
