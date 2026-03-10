@@ -110,3 +110,26 @@ Presiona **Play**. El personaje se mueve y el pickup aplica su efecto.
 - No hay colisiones: asigna una Shape en CollisionShape2D.
 - Pickup no activa: asegúrate de que el Area2D tenga CollisionShape2D y esté en escena.
 
+## 8) Jugar en celular (Android/iOS)
+
+Este proyecto es Godot. Para usarlo en celular debes exportar una build.
+
+### Android
+1) Instala export templates: **Editor → Manage Export Templates**.
+2) Instala JDK + Android SDK (Android Studio) y configura rutas en:
+   **Editor Settings → Export → Android**.
+3) Ve a **Project → Export** y agrega el preset **Android**.
+4) Configura el identificador del paquete (ej: `com.tuempresa.mijuego`).
+5) Exporta un `.apk` (debug para pruebas) y cópialo al celular.
+
+### iOS
+- Requiere macOS + Xcode (desde Linux no se puede exportar iOS).
+- Agrega el preset **iOS** en **Project → Export** y compila en Xcode
+  con una cuenta de Apple para firmar la app.
+
+### Controles táctiles
+El juego usa acciones del **Input Map** (`move_left`, `move_right`, etc.).
+En celular necesitas controles en pantalla:
+- Agrega nodos `TouchScreenButton` o un joystick virtual en tu escena.
+- Asigna cada botón a las acciones del Input Map.
+
